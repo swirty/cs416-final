@@ -1,0 +1,184 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz,amsmath, amsthm, amssymb}
+\usetikzlibrary{calc}%
+\usepackage{graphicx}
+\usepackage{hhline}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{enumerate}
+\usepackage{delarray}
+\usepackage{mathtools}
+\usepackage{tikz-cd} 
+\usepackage[linguistics]{forest}
+\usepackage{verbatim}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{tabularx}
+
+\usetikzlibrary{matrix, positioning}
+
+% The date won't display correctly without this import
+\usepackage{advdate}
+
+% Shortcuts for common sets
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\MM}[1]{\mathcal{M}_{#1}}
+
+% Shortcut for least-common-multiple
+\newcommand{\lcm}{\text{lcm}}
+
+\newcommand{\mc}{\mathcal}
+
+% Category theoretic shortcuts
+% This ain't bad, but don't prefer this over below: 
+% \newcommand{\NAME}{\ensuremath{\mathrm{CONTENT}}}
+% in general, there are a few important font families to know about:
+% \mathbf is boldface
+% \mathrm is roman font
+% \mathbb,\mathcal,\mathscr,\mathfrak are not default. These come through the amsfonts package.
+% a more standard version of mathscr is from the mathrsfs package
+% also \textit,\textbf,\text
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+
+% This draws the norm for a vector in the following way: ||v||
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+
+% This draws limits correctly
+\newcommand{\Lim}[1]{\lim\limits_{#1}}
+
+% Like above, but for sums
+\newcommand{\Sum}[2]{\sum\limits_{#1}\limits^{#2}}
+
+
+
+
+\newtheorem{theorem}{Theorem}
+\setlength{\parindent}{4em}
+\setlength{\parskip}{1em}
+
+\title{CS 416-1: Web Programming \\ \large{Final Project Proposal}}
+\author{Joseph Smith and Corwin Van Deusen}
+\date{November 11, 2022}
+
+% this code was taken from: https://stackoverflow.com/questions/586572/make-code-in-latex-look-nice
+\lstset{ %
+basicstyle=\linespread{1.5}\footnotesize,       % the size of the fonts that are used for the code
+numbers=left,                   % where to put the line-numbers
+numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+stepnumber=1,                   % the step between two line-numbers. If it is 1 each line will be numbered
+numbersep=10pt,                  % how far the line-numbers are from the code
+backgroundcolor=\color{black!7.5},  % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+frame=trBL,           % adds a frame around the code
+tabsize=2,          % sets default tabsize to 2 spaces
+captionpos=b,           % sets the caption-position to bottom
+breaklines=true,        % sets automatic line breaking
+breakatwhitespace=false,    % sets if automatic breaks should only happen at whitespace
+escapeinside={@*}{*@}          % if you want to add a comment within your code
+}
+
+% These saveboxes are for drawing tabulars inside of a Tikz drawing
+\newsavebox{\usertable}
+\sbox{\usertable}{
+    \begin{tabular}{@{}|c|@{}}
+        \hline
+        User \\
+        \hline
+        UID: integer \\
+        userName: string \\
+        timeCreated: long \\
+        \hline
+    \end{tabular}
+}
+
+\newsavebox{\posttable}
+\sbox{\posttable}{
+    \begin{tabular}{@{}|c|@{}}
+        \hline
+        Post \\
+        \hline
+        UID: integer \\
+        PID: integer \\
+        ReplyID: integer \\
+        content: string \\
+        \hline
+    \end{tabular}
+}
+
+\newsavebox{\followtable}
+\sbox{\followtable}{
+    \begin{tabular}{@{}|c|@{}}
+        \hline
+        Follow \\\hline
+        fromID: integer \\
+        toID: integer \\\hline
+    \end{tabular}
+}
+
+\newsavebox{\reactiontable}
+\sbox{\reactiontable}{
+    \begin{tabular}{@{}|c|@{}}
+        \hline
+        Reaction \\
+        \hline
+        UID: integer \\
+        PID: integer \\
+        type: character \\
+        \hline
+    \end{tabular}
+}
+
+\begin{document}
+    % Once we have all of our packages and setting announced, we need to begin our document.  You will notice that at the end of the writing there is an end document statements.  Many options use this begin and end syntax.
+    \maketitle
+    
+    \section{Purpose}
+    \paragraph{This web application will act as a social forum for short form discourse among users on the platform. Short form discourse will take place through ``comets," public messages consisting of at most 250 characters and a single accompanying image, and reactions. This content is entirely user generated and stored in a database.}
+    
+    \section{Project Title}
+    \paragraph{This project will be called Cosmos. This reflects our vision of creating a space where people can communicate openly via brief messages across vast distances.}
+    
+    \newpage
+    
+    \section{Database/Model Design}
+    \paragraph{The back-end of the web application will interact with a database of four tables. The first table would be for storing users, and authentication specific to said users. The second table would store posts, a post being classified as either a comet or a reply. The third table would be for storing follows between users. Finally, the fourth table would hold reactions to posts by users. Defined below are the expected fields for each type of table:}
+    \begin{center}
+    \begin{tikzpicture}[scale=0.75]
+        \tikzstyle{table label} = [draw=none, fill=none, line width=0pt]
+        \tikzset{near start abs/.style={midway, xshift=-1.5cm}}
+        \tikzset{near end abs/.style={midway, xshift=1.5cm}}
+        
+        \node [shape=rectangle, inner sep=0pt, outer xsep=-4pt] (nuser) at (0,0)  {\usebox{\usertable}};
+        \node [shape=rectangle, inner sep=0pt, outer xsep=-4pt] (npost) at (0,10)  {\usebox{\posttable}};
+        \node [shape=rectangle, inner sep=0pt, outer xsep=-4pt] (nfollow) at (10,0)  {\usebox{\followtable}};
+        \node [shape=rectangle, inner sep=0pt, outer xsep=-4pt] (nreaction) at (10,10)  {\usebox{\reactiontable}};
+        
+        \draw[] (nuser) -- (nfollow)
+                node[above, near end abs, xshift=8pt]{\(0..^*\)}
+                node[above, near start, xshift=-0.8cm]{\(1\)};
+        \draw[] (nuser) -- (npost)
+                node[left, midway, yshift=2.5cm]{\(0..^*\)}
+                node[left, near start, yshift=-1.1cm]{\(1\)};
+        \draw[] (nreaction) -- (nuser)
+                node[above, midway, yshift=2.4cm, xshift=2.2cm]{\(0..^*\)}
+                node[above, midway, yshift=-2.85cm, xshift=-2.3cm]{\(1\)};
+        \draw[] (nreaction) -- (npost)
+                node[above, near end abs, xshift=0.3cm]{\(0..^*\)}
+                node[above, near end, xshift=-0.8cm]{\(1\)};
+    \end{tikzpicture}
+    \end{center}
+    
+\end{document}
