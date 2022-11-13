@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 def homePage(request):
     context = {}
-    return render(request, 'home.html', context)
+    return render(request, 'navbar-template.html', context)
