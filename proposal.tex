@@ -18,6 +18,7 @@
 \usepackage{listings}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{hyperref}
 
 \usetikzlibrary{matrix, positioning}
 
@@ -90,6 +91,13 @@ breakatwhitespace=false,    % sets if automatic breaks should only happen at whi
 escapeinside={@*}{*@}          % if you want to add a comment within your code
 }
 
+% This makes the sections in the Table Of Contents clickable
+\hypersetup{
+    colorlinks=false, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    %linkcolor=blue,  %choose some color if you want links to stand out
+}
+
 % These saveboxes are for drawing tabulars inside of a Tikz drawing
 \newsavebox{\usertable}
 \sbox{\usertable}{
@@ -145,6 +153,8 @@ escapeinside={@*}{*@}          % if you want to add a comment within your code
     % Once we have all of our packages and setting announced, we need to begin our document.  You will notice that at the end of the writing there is an end document statements.  Many options use this begin and end syntax.
     \maketitle
     
+    \tableofcontents
+    
     \section{Purpose}
     \paragraph{This web application will act as a social forum for short form discourse among users on the platform. Short form discourse will take place through ``comets," public messages consisting of at most 250 characters and a single accompanying image, and reactions. This content is entirely user generated and stored in a database.}
     
@@ -181,4 +191,8 @@ escapeinside={@*}{*@}          % if you want to add a comment within your code
     \end{tikzpicture}
     \end{center}
     
+    \newpage
+    
+    \section{Work Plan}
+    \paragraph{There will be at least one weekly in person meeting occurring at 4:00 PM on Fridays. This does not include weekend work sessions conducted remotely. This project will utilize a modified Git Flow organizational style for the repository, and so after the first few commits to the repository modifications to the project will occur primarily through feature branches off of the main branch. As the team consists of only two people and the project will only need to be presented a single time, the additional project organizational complexity that full implementation of Git Flow requires is deemed unnecessary at this time.}
 \end{document}
