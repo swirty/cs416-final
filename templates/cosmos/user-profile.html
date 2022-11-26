@@ -8,7 +8,16 @@
   <!-- Navbar -->
   <nav class="navbar shadow fixed-top" style="background-color: #8877dd;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#" style="color: white;"><i class="bi bi-moon-stars-fill"></i>&nbsp;&nbsp;Cosmos</a>
+        <a class="navbar-brand" href="/" style="color: white;"><i class="bi bi-moon-stars-fill"></i>&nbsp;&nbsp;Cosmos</a>
+        <div class="d-flex align-self-end">
+            <h5 class="align-self-center m-1"><span class="badge badge-light justify-self-right">Logged in as {{ current_user.username }}</span></h5>
+            <a class="text-white fw-bold m-1" href="/account/edit">
+                <button class="btn btn-light">Edit Profile</button>
+            </a>
+            <a class="text-white fw-bold" href="/account/logout">
+                <button class="btn btn-light m-1">Logout?</button>
+            </a>
+        </div>
     </div>
   </nav>
 

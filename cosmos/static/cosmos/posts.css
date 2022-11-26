@@ -15,6 +15,10 @@ div.post {
     color: white;
 }
 
+label {
+    color: white;
+}
+
 button.btn {
     /*background-color: var(--neutral-nav-bg-color);*/
 }
