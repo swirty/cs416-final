@@ -50,3 +50,19 @@ def createUser(request):
                'header_flavor': 'Create Your Account',
                'button_flavor': 'Create Account'}
     return render(request, 'registration/edit-create-user.html', context)
+
+
+def showProfile(request, other_user=None):
+    if request.method == 'POST' or other_user == request.user.id or other_user is None:
+        redirect('/')
+    context = {'posts': Post.objects.filter(user=other_user).order_by('posted_at').reverse(),
+               'current_user': request.user}
+    return render(request, 'cosmos/user-profile.html', context)
+
+
+def createPost(request):
+    return None
+
+
+def showPost(request):
+    return None
