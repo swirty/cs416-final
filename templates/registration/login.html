@@ -9,9 +9,18 @@
 {% block body %}
     <div class="container d-flex justify-content-center">
         <form class="m-5 crispy-form" action="{% url 'login' %}" method="post">
+            <h3 class="text-white">Sign In To Cosmos</h3>
             {% csrf_token %}
             {{ form|crispy }}
-            <button type="submit" class="btn btn-light my-2">Log In</button>
+            <div class="d-grid my-2">
+                <button class="btn btn-light btn-lg" type="submit">Log In</button>
+            </div>
         </form>
+    </div>
+    <div class="d-grid container justify-content-center">
+        <h4 class="text-white">Don't have an account?</h4>
+    </div>
+    <div class="d-grid container justify-content-center">
+        <a href="/account/signup"><button class="btn btn-lg btn-secondary">Sign Up</button></a>
     </div>
 {% endblock %}

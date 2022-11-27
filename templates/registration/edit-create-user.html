@@ -8,10 +8,11 @@
 
 {% block body %}
     <div class="container d-flex justify-content-center">
-        <form class="m-5 crispy-form" action="{% url 'editUser' %}" method="post">
+        <form class="m-5 crispy-form" action="" method="post">
+            <h1 class="text-white">{{ header_flavor }}</h1>
             {% csrf_token %}
             {{ form|crispy }}
-            <button type="submit" class="btn btn-light my-2">Save Edits</button>
+            <button type="submit" class="btn btn-light my-2">{{ button_flavor }}</button>
         </form>
     </div>
 {% endblock %}
