@@ -1,0 +1,67 @@
+<div class="col-6 rounded shadow m-3 p-3 post">
+
+  <!-- Post Header -->
+  <div class="row m-2 mb-3">
+
+    <!-- Pfp -->
+    <div class="col-2 d-flex px-0">
+      <img src="{{ post.user.profile.pro_pic.url }}" class="rounded-circle img-fluid">{#  #}
+    </div>
+
+    <!-- Username / Date Posted -->
+    <div class="col d-flex align-items-center">
+      <div>
+        <h3>{{ post.user.username }}</h3>
+        <h6 class="">{{ post.posted_at }}</h6>
+      </div>
+    </div>
+
+    <!-- Share Button -->
+    <div class="col d-flex justify-content-end p-0">
+      <button class="btn btn-outline-primary" style="width:48px;height:48px;">
+        <i class="bi bi-share-fill"></i>
+      </button>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Post Body -->
+  <div class="row m-2">
+    <p>{{ post.post_body }}</p>
+  </div>
+
+  <!-- Post Image -->
+  <!--div class="row m-2">
+    <img src="http://placekitten.com/1080/720" alt="" class="rounded border p-0">
+  </div-->
+  <hr>
+
+  <!-- Post Controls -->
+  <div class="row d-flex mt-4 justify-content-between">
+    <!-- Like -->
+    <div class="col d-flex justify-content-center p-0">
+      <button class="btn btn-outline-like" style="width:48px;height:48px;font-size:1.5em;">
+        <i class="bi bi-hand-thumbs-up-fill"></i>
+      </button>
+    </div>
+    <!-- Dislike -->
+    <div class="col d-flex justify-content-center p-0">
+      <button class="btn btn-outline-dislike" style="width:48px;height:48px;font-size:1.5em;">
+        <i class="bi bi-hand-thumbs-down-fill"></i>
+      </button>
+    </div>
+    <!-- Repost -->
+    <div class="col d-flex justify-content-center p-0">
+      <button class="btn btn-outline-info" style="width:48px;height:48px;font-size:1.5em;">
+        <i class="bi bi-chat-square-quote-fill"></i>
+      </button>
+    </div>
+    <!-- Reply -->
+    <div class="col d-flex justify-content-center p-0">
+      <button class="btn btn-outline-warning" style="width:48px;height:48px;font-size:1.5em;">
+        <i class="bi bi-reply-fill"></i>
+      </button>
+    </div>
+  </div>
+</div>

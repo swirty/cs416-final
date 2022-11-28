@@ -1,0 +1,56 @@
+:root {
+    --neutral-body-bg-color: #221e38;
+    --neutral-div-bg-color: #443c6f;
+    --neutral-nav-bg-color: #8877dd;
+    --neutral-light-color: #aa88ff;
+    --btn-like: #64d200;
+    --btn-dislike: #ff4646;
+}
+
+body {
+    background-color: var(--neutral-body-bg-color);
+}
+
+div.post {
+    background-color: var(--neutral-div-bg-color);
+    border-top: 15px ridge var(--neutral-light-color);
+    color: white;
+}
+
+button.btn.btn-outline-like {
+    border-color: var(--btn-like);
+    color: var(--btn-like);
+}
+
+button.btn.btn-outline-like:hover {
+    color: black;
+    background-color: var(--btn-like);
+}
+
+button.btn.btn-outline-dislike {
+    border-color: var(--btn-dislike);
+    color: var(--btn-dislike);
+}
+
+button.btn.btn-outline-dislike:hover {
+    color: black;
+    background-color: var(--btn-dislike);
+}
+
+button.btn.btn-load {
+    background-color: var(--neutral-nav-bg-color);
+    border-color: var(--neutral-nav-bg-color);
+    color: white;
+}
+
+button.btn.btn-load:hover {
+    background-color: var(--neutral-div-bg-color);
+}
+
+nav.navbar {
+    background-color: var(--neutral-nav-bg-color);
+}
+
+img.object-fit-cover {
+    object-fit: cover;
+}

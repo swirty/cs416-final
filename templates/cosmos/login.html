@@ -1,0 +1,20 @@
+{% extends 'cosmos/base-head.html' %}
+
+{% block title %}
+  Join The Cosmos!
+{% endblock %}
+
+{% block body %}
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-8 rounded shadow post">
+        <h2 class="text-center">Login To Cosmos</h2>
+        <form action="" method="post">
+          {% csrf_token %}
+          {{ form.as_div|crispy }}
+          <input type="submit" value="Login">
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
