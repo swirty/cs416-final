@@ -10,7 +10,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Post
-from CS416FinalProject.forms import UpdateUserForm, CreateUserForm
+from CS416FinalProject.forms import UpdateUserForm, CreateUserForm, CreatePostForm
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
@@ -69,8 +69,21 @@ def showProfile(request, other_user=None):
 
 @login_required(login_url='login')
 def createPost(request):
-    return None
+    if request.method == 'POST':
+        form = CreatePostForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            post_body = form.cleaned_data['post_body']
+            post = Post(user=user, post_body=post_body)
+            post.save()
+            return redirect('/')
+    context = {'form': CreatePostForm(),
+               'header_flavor': 'Create a Post',
+               'button_flavor': 'Go!'}
+    return render(request, 'cosmos/create-post.html', context)
 
 @login_required(login_url='login')
-def showPost(request):
+def showPost(request, view_post=None):
+    if request.method == 'POST' or view_post is None:
+        redirect('/')
     return None
