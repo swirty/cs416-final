@@ -4,3 +4,4 @@
 !*.iml
 *.bak
 */migrations/*
+db.sqlite3
