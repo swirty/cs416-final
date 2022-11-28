@@ -5,13 +5,17 @@
 
     <!-- Pfp -->
     <div class="col-2 d-flex px-0">
-      <img src="{{ post.user.profile.pro_pic.url }}" class="rounded-circle img-fluid">{#  #}
+      <a href="/user/{{ post.user_id }}">
+        <img src="{{ post.user.profile.pro_pic.url }}" class="rounded-circle img-fluid">
+      </a>
     </div>
 
     <!-- Username / Date Posted -->
     <div class="col d-flex align-items-center">
       <div>
-        <h3>{{ post.user.username }}</h3>
+        <a href="/user/{{ post.user_id }}">
+          <h3>{{ post.user.username }}</h3>
+        </a>
         <h6 class="">{{ post.posted_at }}</h6>
       </div>
     </div>

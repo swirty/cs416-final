@@ -1,13 +1,17 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.home_page, name="landing"),
-    path('user/<int:user_id>', views.user_page, name="user_page")
-    #path('register', views.register, name="register"),
-    #path('login', views.login, name="login"),
+    path('', views.homePage, name='landing'),
+    path('post/create', views.createPost, name='createPost'),
+    path('post/<int:view_post>', views.showPost, name='queryPost'),
+    path('user/<int:other_user>', views.showProfile, name='queryUser'),
+    path('user/', views.showProfile, name='queryUser'),
+    path('account/edit', views.editUser, name='editUser'),
+    path('account/signup', views.createUser, name='createUser'),
+    path('account/', include('django.contrib.auth.urls'), name="loginPage"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_URL)
 
 if(settings.DEBUG):

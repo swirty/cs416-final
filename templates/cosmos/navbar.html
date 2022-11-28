@@ -1,22 +1,21 @@
 <!-- Navbar -->
-<nav class="navbar shadow fixed-top navbar-expand-lg" style="background-color: #8877dd;">
-  <div class="container-fluid">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#" style="color: white;"><i class="bi bi-moon-stars-fill"></i>&nbsp;&nbsp;Cosmos</a>
-
-    <!-- Navbar Toggler -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Navbar Content (toggled by the toggler on small screen sizes) -->
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-
-      </ul>
+  <nav class="navbar shadow fixed-top" style="background-color: #8877dd;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/" style="color: white;"><i class="bi bi-moon-stars-fill"></i>&nbsp;&nbsp;Cosmos</a>
+        <div class="d-flex align-self-end">
+            <h5 class="align-self-center m-1"><span class="badge badge-light justify-self-right">Logged in as {{ current_user.username }}</span></h5>
+            <a class="text-white fw-bold m-1" href="/post/create">
+                <button class="btn btn-light">Make a Post</button>
+            </a>
+            <a class="text-white fw-bold m-1" href="/account/edit">
+                <button class="btn btn-light">Edit Profile</button>
+            </a>
+            <a class="text-white fw-bold" href="/account/logout">
+                <button class="btn btn-light m-1">Logout?</button>
+            </a>
+        </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<!-- Navbar Spacer -->
-<div class="" style="height:50px;"></div>
+  <!-- Navbar Spacer -->
+  <div class="" style="height:50px;"></div>

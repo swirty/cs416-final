@@ -6,14 +6,14 @@
 {% endblock %}
 
 {% block body %}
-  {% include "cosmos/navbar.html" with user=user %}
+  <!-- Navbar -->
+  {% include "cosmos/navbar.html" with current_user=current_user %}
 
   <!-- Posts -->
   <div class="container">
     <div class="row justify-content-center">
       {% for post in posts %}
         {% include "cosmos/post.html" with post=post %}
-{#        {% include "cosmos/card-post.html" with post=post %}#}
       {% endfor %}
       <div class="col-6 d-flex justify-content-center align-items-center" style="height:150px;">
         <button class="btn btn-load w-50">
