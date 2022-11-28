@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from cosmos.models import Post
 
 class GenericUserForm(forms.ModelForm):
     class Meta:
@@ -13,3 +14,9 @@ class UpdateUserForm(GenericUserForm):
 class CreateUserForm(GenericUserForm):
     username = forms.CharField(max_length=150, label='Username')
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
+
+class CreatePostForm(forms.ModelForm):
+    post_body = forms.CharField(max_length=250, label='Write your post')
+    class Meta:
+        model = Post
+        fields = ('post_body',)
