@@ -16,17 +16,16 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm
 
+
 @login_required(login_url='login')
 def homePage(request):
-    if isinstance(request.user.id, int):
-        context = {'posts': Post.objects.filter(user=request.user).order_by('posted_at').reverse(),
-                   'current_user': request.user}
-        return render(request, 'cosmos/user-profile.html', context)
-    return redirect('/account/login/')
+    context = {'posts': Post.objects.filter(user=request.user).order_by('posted_at').reverse(),
+               'current_user': request.user}
+    return render(request, 'cosmos/user-profile.html', context)
+
 
 @login_required(login_url='login')
 def editUser(request):
-    if isinstance(request.user.id, int):
         form = UpdateUserForm(request.POST, instance=request.user or None)
         context = {'current_user': request.user,
                    'form': form,
@@ -38,9 +37,10 @@ def editUser(request):
                 password_hash = make_password(form.cleaned_data['password'])
                 user = User(username=username, password=password_hash, id=request.user.id)
                 user.save()
-                return render(request, 'registration/success.html', context={'success_flavor': 'User Edited Successfully'})
+                return render(request, 'registration/success.html',
+                              context={'success_flavor': 'User Edited Successfully'})
         return render(request, 'registration/edit-create-user.html', context)
-    return redirect('/account/login/')
+
 
 def createUser(request):
     if isinstance(request.user.id, int):
@@ -67,6 +67,7 @@ def showProfile(request, other_user=None):
                'current_user': request.user}
     return render(request, 'cosmos/user-profile.html', context)
 
+
 @login_required(login_url='login')
 def createPost(request):
     if request.method == 'POST':
@@ -81,6 +82,7 @@ def createPost(request):
                'header_flavor': 'Create a Post',
                'button_flavor': 'Go!'}
     return render(request, 'cosmos/create-post.html', context)
+
 
 @login_required(login_url='login')
 def showPost(request, view_post=None):
