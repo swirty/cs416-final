@@ -1,0 +1,20 @@
+{% extends "cosmos/base-head.html" %}
+{% load static %}
+
+{% block title %}
+  Cosmos: Social Space
+{% endblock %}
+
+{% block body %}
+  <!-- Navbar -->
+  {% include "cosmos/navbar.html" with current_user=current_user %}
+
+  <!-- Posts -->
+  <div class="container">
+    <div class="row justify-content-center">
+      {% for post in posts %}
+        {% include "cosmos/post.html" with post=post %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

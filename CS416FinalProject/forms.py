@@ -16,7 +16,7 @@ class CreateUserForm(GenericUserForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
 class CreatePostForm(forms.ModelForm):
-    post_body = forms.CharField(max_length=250, label='Write your post')
+    post_body = forms.CharField(max_length=250, widget=forms.Textarea)
     class Meta:
         model = Post
         fields = ('post_body',)
