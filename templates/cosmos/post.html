@@ -22,9 +22,9 @@
 
     <!-- Share Button -->
     <div class="col d-flex justify-content-end p-0">
-      <button class="btn btn-outline-primary" style="width:48px;height:48px;">
+      <a href="" class="btn btn-outline-primary" style="width:48px;height:48px;">
         <i class="bi bi-share-fill"></i>
-      </button>
+      </a>
     </div>
   </div>
 
@@ -45,27 +45,27 @@
   <div class="row d-flex mt-4 justify-content-between">
     <!-- Like -->
     <div class="col d-flex justify-content-center p-0">
-      <button class="btn btn-outline-like" style="width:48px;height:48px;font-size:1.5em;">
+      <a class="btn btn-outline-success" href="" style="width:48px;height:48px;font-size:1.5em;">
         <i class="bi bi-hand-thumbs-up-fill"></i>
-      </button>
+      </a>
     </div>
     <!-- Dislike -->
     <div class="col d-flex justify-content-center p-0">
-      <button class="btn btn-outline-dislike" style="width:48px;height:48px;font-size:1.5em;">
+      <a class="btn btn-outline-danger" href="" style="width:48px;height:48px;font-size:1.5em;">
         <i class="bi bi-hand-thumbs-down-fill"></i>
-      </button>
+      </a>
     </div>
-    <!-- Repost -->
+    <!-- Thread -->
     <div class="col d-flex justify-content-center p-0">
-      <button class="btn btn-outline-info" style="width:48px;height:48px;font-size:1.5em;">
+      <a class="btn btn-outline-info" href="{% url 'queryPost' post.id %}" style="width:48px;height:48px;font-size:1.5em;">
         <i class="bi bi-chat-square-quote-fill"></i>
-      </button>
+      </a>
     </div>
     <!-- Reply -->
     <div class="col d-flex justify-content-center p-0">
-      <button class="btn btn-outline-warning" style="width:48px;height:48px;font-size:1.5em;">
+      <a class="btn btn-outline-warning" href="{% url 'createReply' post.id %}" style="width:48px;height:48px;font-size:1.5em;">
         <i class="bi bi-reply-fill"></i>
-      </button>
+      </a>
     </div>
   </div>
 </div>
