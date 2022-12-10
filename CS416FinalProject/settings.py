@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cosmos.apps.CosmosConfig',
+    'accounts.apps.AccountsConfig',
     'crispy_forms',
 ]
 

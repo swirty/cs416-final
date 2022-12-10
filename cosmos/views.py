@@ -19,7 +19,10 @@ from .forms import LoginForm
 @login_required(login_url='login')
 def homePage(request):
     if isinstance(request.user.id, int):
-        context = {'posts': Post.objects.filter(user=request.user).order_by('posted_at').reverse(),
+        posts = None
+        if Post.objects.exists():
+            posts = Post.objects.filter(user=request.user).order_by('posted_at').reverse()
+        context = {'posts': posts,
                    'current_user': request.user}
         return render(request, 'cosmos/user-profile.html', context)
     return redirect('/account/login/')

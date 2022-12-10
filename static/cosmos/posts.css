@@ -17,33 +17,33 @@ div.post {
     color: white;
 }
 
-button.btn.btn-outline-like {
+.btn.btn-outline-like {
     border-color: var(--btn-like);
     color: var(--btn-like);
 }
 
-button.btn.btn-outline-like:hover {
+.btn.btn-outline-like:hover {
     color: black;
     background-color: var(--btn-like);
 }
 
-button.btn.btn-outline-dislike {
+.btn.btn-outline-dislike {
     border-color: var(--btn-dislike);
     color: var(--btn-dislike);
 }
 
-button.btn.btn-outline-dislike:hover {
+.btn.btn-outline-dislike:hover {
     color: black;
     background-color: var(--btn-dislike);
 }
 
-button.btn.btn-load {
+.btn.btn-load {
     background-color: var(--neutral-nav-bg-color);
     border-color: var(--neutral-nav-bg-color);
     color: white;
 }
 
-button.btn.btn-load:hover {
+.btn.btn-load:hover {
     background-color: var(--neutral-div-bg-color);
 }
 
