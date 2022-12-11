@@ -1,3 +1,4 @@
+{% load static %}
 <div class="col-6 rounded shadow m-3 p-3 post">
 
   <!-- Post Header -->
@@ -49,27 +50,30 @@
   <div class="row d-flex mt-4 justify-content-between">
     <!-- Like -->
     <div class="col d-flex justify-content-center p-0">
-      <a class="btn btn-outline-like" href="" style="width:48px;height:48px;font-size:1.5em;">
+      <button class="btn btn-outline-like" onclick="setLikes({{ post.id }}, {{ current_user.id }})" style="height:48px;font-size:1.5em;">
         <i class="bi bi-hand-thumbs-up-fill"></i>
-      </a>
+          <span id="{{ post.id }}-likes"></span>
+      </button>
     </div>
     <!-- Dislike -->
     <div class="col d-flex justify-content-center p-0">
-      <a class="btn btn-outline-dislike" href="" style="width:48px;height:48px;font-size:1.5em;">
+      <button class="btn btn-outline-dislike" onload="getDislikes({{ post.id }})" onclick="setDislikes({{ post.id }}, {{ current_user.id }})" style="height:48px;font-size:1.5em;">
         <i class="bi bi-hand-thumbs-down-fill"></i>
-      </a>
+          <span id="{{ post.id }}-dislikes"></span>
+      </button>
     </div>
     <!-- Thread -->
     <div class="col d-flex justify-content-center p-0">
-      <a class="btn btn-outline-info" href="{% url 'queryPost' post.id %}" style="width:48px;height:48px;font-size:1.5em;">
-        <i class="bi bi-chat-square-quote-fill"></i>
+      <a class="btn btn-outline-info" href="{% url 'queryPost' post.id %}" style="height:48px;font-size:1.5em;">
+        <span class="bi bi-chat-square-quote-fill"></span>
       </a>
     </div>
     <!-- Reply -->
     <div class="col d-flex justify-content-center p-0">
-      <a class="btn btn-outline-warning" href="{% url 'createReply' post.id %}" style="width:48px;height:48px;font-size:1.5em;">
+      <a class="btn btn-outline-warning" href="{% url 'createReply' post.id %}" style="height:48px;font-size:1.5em;">
         <i class="bi bi-reply-fill"></i>
       </a>
     </div>
   </div>
 </div>
+<script src="{% static 'cosmos/scripts/posts.js' %}" onload="getBoth({{ post.id }})"></script>

@@ -7,12 +7,14 @@
 # def user_page(request, user_id):
 #     context = {'posts': Post.objects.filter(user_id=user_id).order_by('posted_at').reverse()}
 #    return render(request, 'cosmos/user-profile.html', context)
-from django.shortcuts import render, redirect
-from .models import Post
-from CS416FinalProject.forms import UpdateUserForm, CreateUserForm, CreatePostForm
-from django.contrib.auth.models import User
-from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+
+from CS416FinalProject.forms import CreatePostForm
+from .models import Post
+from .models import Reaction
 
 
 @login_required(login_url='login')
@@ -70,3 +72,52 @@ def createReply(request, other_post=None):
                'header_flavor': 'Create a Post',
                'button_flavor': 'Go!'}
     return render(request, 'cosmos/create-post.html', context)
+
+#the worst function in the entire project
+@csrf_exempt
+def ajaxOperations(request):
+    def likeReturn(postID):
+        count = Reaction.objects.filter(reaction='LIKE', post_id=postID).count()
+        return HttpResponse(count)
+
+    def dislikeReturn(postID):
+        count = Reaction.objects.filter(reaction='DISLIKE', post_id=postID).count()
+        return HttpResponse(count)
+
+    if request.method == 'GET':
+        return None
+    count = None
+
+    if request.POST['operation'] == 'GETLIKES':
+        return likeReturn(request.POST['postID'])
+
+    if request.POST['operation'] == 'GETDISLIKES':
+        return dislikeReturn(request.POST['postID'])
+
+    if request.POST['operation'] == 'SETLIKES':
+        # get the likes associated with this post and user
+        react = Reaction.objects.filter(reaction='LIKE', post_id=request.POST['postID'], user_id=request.POST['userID'])
+        # is there a 'like' between this user and this post?
+        if react.count() == 0:
+            # no, create a like
+            newReact = Reaction(reaction='LIKE', post_id=request.POST['postID'], user_id=request.POST['userID'])
+            newReact.save()
+        else:
+            # yes, delete it
+            react[0].delete()
+        # give client the updated count
+        return likeReturn(request.POST['postID'])
+
+    if request.POST['operation'] == 'SETDISLIKES':
+        # get the dislikes associated with this post and user
+        react = Reaction.objects.filter(reaction='DISLIKE', post_id=request.POST['postID'], user_id=request.POST['userID'])
+        # is there a 'dislike' between this user and this post?
+        if react.count() == 0:
+            # no, create a dislike
+            newReact = Reaction(reaction='DISLIKE', post_id=request.POST['postID'], user_id=request.POST['userID'])
+            newReact.save()
+        else:
+            # yes, delete it
+            react[0].delete()
+        # give client the updated count
+        return dislikeReturn(request.POST['postID'])

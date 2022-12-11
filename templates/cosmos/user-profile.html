@@ -14,7 +14,7 @@
     <div class="row justify-content-center">
       {% if posts %}
         {% for post in posts %}
-          {% include "cosmos/post.html" with post=post %}
+          {% include "cosmos/post.html" with post=post current_user=current_user %}
         {% endfor %}
       <div class="col-6 d-flex justify-content-center align-items-center" style="height:150px;">
         <button class="btn btn-load w-50">
