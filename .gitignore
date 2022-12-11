@@ -6,3 +6,6 @@
 */migrations/*
 db.sqlite3
 *.pyc
+q
+static/images/*
+!static/images/default-pro-pic.png

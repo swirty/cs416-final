@@ -11,25 +11,6 @@ from PIL import ImageOps
 
 
 # Each profile maps to one user
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    about = models.CharField(max_length=250, default="Hello, Cosmos! I haven't written a bio yet...")
-
-    def profile_pic_directory(instance, filename: str):
-        print(os.getcwd())
-        return '/uploads/profile/{0}/pfp'.format(instance.user.id)
-    pro_pic = models.ImageField(null=True, default="default-pro-pic.png")
-
-    def banner_pic_directory(instance, filename: str):
-        return 'uploads/profile/{0}/banner'.format(instance.user.id)
-    banner_pic = models.ImageField(null=True, default="default-banner-pic.png")
-
-    def save(self, *args, **kwargs):
-        #self.pro_pic = ImageOps.fit(self.pro_pic, (256, 256))
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.user.username + "\'s profile"
 
 
 # Each post maps to one user and many reactions.
