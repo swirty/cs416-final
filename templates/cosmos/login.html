@@ -1,5 +1,12 @@
 {% extends 'cosmos/base-head.html' %}
+{% load crispy_forms_tags %}
 {% load crispy_forms_filters %}
+{% load static %}
+
+{% block header %}
+  <!-- While this may look redundant, this is necessary for styles to apply below -->
+  <link rel="stylesheet" href="{% static 'cosmos/posts.css' %}">
+{% endblock %}
 
 {% block title %}
   Join The Cosmos!
@@ -8,12 +15,14 @@
 {% block body %}
   <div class="container-fluid">
     <div class="row justify-content-center">
-      <div class="col-8 rounded shadow post">
+      <div class="col-4 rounded shadow post">
         <h2 class="text-center">Login To Cosmos</h2>
-        <form action="" method="post">
+        <form action="" method="post" class="py-2">
           {% csrf_token %}
           {{ form|crispy }}
-          <input type="submit" value="Login">
+          <div class="d-flex justify-content-center">
+            <input type="submit" value="Login" class="btn btn-lg btn-load mt-3 mb-2">
+          </div>
         </form>
       </div>
     </div>

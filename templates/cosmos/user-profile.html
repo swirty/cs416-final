@@ -12,14 +12,21 @@
   <!-- Posts -->
   <div class="container">
     <div class="row justify-content-center">
-      {% for post in posts %}
-        {% include "cosmos/post.html" with post=post %}
-      {% endfor %}
+      {% if posts %}
+        {% for post in posts %}
+          {% include "cosmos/post.html" with post=post %}
+        {% endfor %}
       <div class="col-6 d-flex justify-content-center align-items-center" style="height:150px;">
         <button class="btn btn-load w-50">
           <span><i class="bi bi-arrow-down-short"></i>&nbsp;Load more posts&nbsp;<i class="bi bi-arrow-down-short"></i></span>
         </button>
       </div>
+      {% else %}
+        <div class="col-8 post">
+          <h1>I haven't made any posts yet!</h1>
+          <h4>Check back later...</h4>
+        </div>
+      {% endif %}
     </div>
   </div>
 {% endblock %}
