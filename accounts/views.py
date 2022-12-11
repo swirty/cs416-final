@@ -6,6 +6,9 @@ from django.shortcuts import render, redirect
 from CS416FinalProject.forms import UpdateUserForm, CreateUserForm
 
 
+# IMPORTANT NOTE ABOUT LOGIN AND 'login.html': Django will automagically look in templates/registration/ for login.html!
+
+
 @login_required(login_url='login')
 def editUser(request):
         form = UpdateUserForm(request.POST, instance=request.user or None)
