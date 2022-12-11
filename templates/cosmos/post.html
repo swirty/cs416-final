@@ -13,7 +13,7 @@
     <!-- Username / Date Posted -->
     <div class="col d-flex align-items-center">
       <div>
-        <a href="/user/{{ post.user_id }}">
+        <a class="text-white text-decoration-none" href="/user/{{ post.user_id }}">
           <h3>{{ post.user.username }}</h3>
         </a>
         <h6 class="">{{ post.posted_at }}</h6>
@@ -22,9 +22,13 @@
 
     <!-- Share Button -->
     <div class="col d-flex justify-content-end p-0">
-      <a href="" class="btn btn-outline-primary" style="width:48px;height:48px;">
-        <i class="bi bi-share-fill"></i>
-      </a>
+      <div class="dropdown">
+        <button class="btn btn-load dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+      <ul class="dropdown-menu dropdown-menu-dark">
+        <li><a class="dropdown-item" href="#">Share</a></li>
+        <li><a class="dropdown-item" href="#">Delete</a></li>
+  </ul>
+</div>
     </div>
   </div>
 
