@@ -5,12 +5,55 @@
   Cosmos: Social Space
 {% endblock %}
 
+{% block header %}
+  <script src="{% static 'cosmos/scripts/profile.js' %}"></script>
+{% endblock %}
+
 {% block body %}
+  <div class="toast-container position-fixed top-50 start-50 translate-middle p-3 p-0">
+    <div id="link-copied-toast" class="toast w-100" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-body">
+        Link Copied
+      </div>
+    </div>
+  </div>
+
   <!-- Navbar -->
   {% include "cosmos/navbar.html" with current_user=current_user %}
 
-  <!-- Posts -->
-  <div class="container">
+  <!-- Profile and Posts -->
+  <div class="container my-4">
+
+    <!-- Profile -->
+    <div class="row justify-content-center my-4">
+      <div class="col-10 d-flex card post p-0" style="border-top: none;">
+        <img src="{{ profile_user.profile.banner_pic.url }}" alt="" class="card-img-top">
+        <div class="row ms-3">
+          <div class="col-2 px-3" style="height: 0;">
+            <img src="{{ profile_user.profile.pro_pic.url }}" alt="" class="rounded-circle img-fluid profile-pro-pic">
+          </div>
+        </div>
+        <div class="row mx-3 mb-3">
+          <div class="col-2 p-3 text-center">
+            <div style="height: 4.0em;"></div>
+            <h6>{{ profile_user.username }}</h6>
+            <p class="my-0">User since</p>
+            <p class="my-0">{{ profile_user.date_joined.date }}</p>
+          </div>
+          <div class="col-8 p-3">
+            <h5>About Me</h5>
+            <p>{{ profile_user.profile.about }}</p>
+          </div>
+          <div class="d-flex col-2 p-3 justify-content-center" style="flex-direction: column">
+            <button class="btn btn-load w-100 h-25" data-cosmos-disable-delay="Link copied!" data-cosmos-disable-delay-duration="750" onclick="copyProfileLink({{ profile_user.id }})">Copy Link</button>
+            <div class="h-25"></div>
+            <button class="btn btn-load w-100 h-25" data-cosmos-disable-delay data-cosmos-disable-delay-duration="750">Follow</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Posts -->
     <div class="row justify-content-center">
       {% if posts %}
         {% for post in posts %}

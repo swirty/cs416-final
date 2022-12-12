@@ -15,12 +15,11 @@ class Profile(models.Model):
     def profile_pic_directory(instance, filename: str):
         print(os.getcwd())
         return '/uploads/profile/{0}/pfp'.format(instance.user.id)
-    #pro_pic = models.ImageField(null=True, default="default-pro-pic.png")
     pro_pic = ResizedImageField(size=[256, 256], scale=None, crop=['middle', 'center'], keep_meta=False, force_format='PNG', null=True, default="default-pro-pic.png")
 
     def banner_pic_directory(instance, filename: str):
         return 'uploads/profile/{0}/banner'.format(instance.user.id)
-    banner_pic = models.ImageField(null=True, default="default-banner-pic.png")
+    banner_pic = ResizedImageField(size=[1280, 320], scale=None, crop=['middle', 'center'], keep_meta=False, force_format='PNG', null=True, default="default-banner-pic.png")
 
     def __str__(self):
         return self.user.username + "\'s profile"

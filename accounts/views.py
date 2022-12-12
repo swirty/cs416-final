@@ -10,7 +10,7 @@ from .forms import UpdateUserForm, CreateUserForm
 
 
 @login_required(login_url='login')
-def editUser(request):
+def edit_user(request):
         form = UpdateUserForm(request.POST, instance=request.user or None)
         context = {'current_user': request.user,
                    'form': form,
@@ -27,7 +27,7 @@ def editUser(request):
         return render(request, 'registration/edit-create-user.html', context)
 
 
-def createUser(request):
+def create_user(request):
     if isinstance(request.user.id, int):
         return redirect('/')
     if request.method == 'POST':
