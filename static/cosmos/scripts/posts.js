@@ -67,10 +67,17 @@ function setDislikes(postID, userID){
     })
 }
 
-//
-//* Copies link to clipboard and allows deletion
-//
+// AJAX call for adding and removing a follow
+function setFollow(followerID, followedID){
 
+}
+
+//AJAX call for deleting a post
+function deletePost(postID){
+
+}
+
+// Copies link to clipboard
 function copyLink(copyLink){
     navigator.clipboard.writeText(copyLink.toString())
 }

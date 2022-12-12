@@ -9,12 +9,12 @@
 #    return render(request, 'cosmos/user-profile.html', context)
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
 from CS416FinalProject.forms import CreatePostForm
-from .models import Post
-from .models import Reaction
+from .models import Post, Reaction, User
+
 
 
 @login_required(login_url='login')
@@ -23,10 +23,12 @@ def homePage(request):
                'current_user': request.user}
     return render(request, 'cosmos/user-profile.html', context)
 
-
+@login_required(login_url='login')
 def showProfile(request, other_user=None):
     if request.method == 'POST' or other_user == request.user.id or other_user is None:
-        redirect('/')
+        return redirect('landing')
+    get_object_or_404(User, id=other_user)
+
     context = {'posts': Post.objects.filter(user=other_user).order_by('posted_at').reverse(),
                'current_user': request.user}
     return render(request, 'cosmos/user-profile.html', context)
@@ -52,6 +54,8 @@ def createPost(request):
 def showPost(request, view_post=None):
     if request.method == 'POST' or view_post is None:
         return redirect('/')
+    get_object_or_404(Post, id=view_post)
+
     context = {'posts': Post.objects.filter(id=view_post).union(Post.objects.filter(reply_id=view_post)),
                'current_user': request.user}
     return render(request, 'cosmos/post-thread.html', context)
