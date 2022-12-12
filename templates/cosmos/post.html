@@ -1,3 +1,6 @@
+{% load static %}
+<!-- Holds the CSRF Token for posts.js -->
+<meta name="_token" content="{{ csrf_token }}">
 <div class="col-6 rounded shadow m-3 p-3 post">
 
   <!-- Post Header -->
@@ -20,13 +23,18 @@
       </div>
     </div>
 
-    <!-- Share Button -->
+    <!-- Dropdown Menu -->
     <div class="col d-flex justify-content-end p-0">
-      <div class="dropdown">
+      <div class="dropdown d-flex btn-group">
+        {% if post.user != current_user %}
+          <button class="btn btn-load">Follow</button>
+        {% endif %}
         <button class="btn btn-load dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
       <ul class="dropdown-menu dropdown-menu-dark">
-        <li><a class="dropdown-item" href="#">Share</a></li>
-        <li><a class="dropdown-item" href="#">Delete</a></li>
+        <li><span onclick="copyLink({% url 'queryPost' post.id %})" class="dropdown-item">Share</span></li>
+          {% if post.user == current_user %}
+            <li><span class="dropdown-item">Delete</span></li>
+          {% endif %}
   </ul>
 </div>
     </div>
@@ -49,20 +57,22 @@
   <div class="row d-flex mt-4 justify-content-between">
     <!-- Like -->
     <div class="col d-flex justify-content-center p-0">
-      <a class="btn btn-outline-like" href="" style="width:48px;height:48px;font-size:1.5em;">
+      <button class="btn btn-outline-like" onclick="setLikes({{ post.id }}, {{ current_user.id }})" style="height:48px;font-size:1.5em;">
         <i class="bi bi-hand-thumbs-up-fill"></i>
-      </a>
+          <span id="{{ post.id }}-likes"></span>
+      </button>
     </div>
     <!-- Dislike -->
     <div class="col d-flex justify-content-center p-0">
-      <a class="btn btn-outline-dislike" href="" style="width:48px;height:48px;font-size:1.5em;">
+      <button class="btn btn-outline-dislike" onload="getDislikes({{ post.id }})" onclick="setDislikes({{ post.id }}, {{ current_user.id }})" style="height:48px;font-size:1.5em;">
         <i class="bi bi-hand-thumbs-down-fill"></i>
-      </a>
+          <span id="{{ post.id }}-dislikes"></span>
+      </button>
     </div>
     <!-- Thread -->
     <div class="col d-flex justify-content-center p-0">
-      <a class="btn btn-outline-info" href="{% url 'queryPost' post.id %}" style="width:48px;height:48px;font-size:1.5em;">
-        <i class="bi bi-chat-square-quote-fill"></i>
+      <a class="btn btn-outline-info" href="{% url 'queryPost' post.id %}" style="height:48px;font-size:1.5em;">
+        <span class="bi bi-chat-square-quote-fill"></span>
       </a>
     </div>
     <!-- Reply -->
@@ -73,3 +83,4 @@
     </div>
   </div>
 </div>
+<script src="{% static 'cosmos/scripts/posts.js' %}" onload="getBoth({{ post.id }})"></script>

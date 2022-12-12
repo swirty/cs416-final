@@ -13,7 +13,7 @@
   <div class="container">
     <div class="row justify-content-center">
       {% for post in posts %}
-        {% include "cosmos/post.html" with post=post %}
+        {% include "cosmos/post.html" with post=post current_user=current_user %}
       {% endfor %}
     </div>
   </div>
