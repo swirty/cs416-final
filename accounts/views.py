@@ -3,7 +3,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
-from CS416FinalProject.forms import UpdateUserForm, CreateUserForm
+from .forms import UpdateUserForm, CreateUserForm
 
 
 # IMPORTANT NOTE ABOUT LOGIN AND 'login.html': Django will automagically look in templates/registration/ for login.html!

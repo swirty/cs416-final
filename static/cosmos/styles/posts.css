@@ -54,3 +54,7 @@ nav.navbar {
 img.object-fit-cover {
     object-fit: cover;
 }
+
+label {
+    color: white;
+}
