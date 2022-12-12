@@ -3,7 +3,7 @@
 //
 //* AJAX calls conform to the standard below
 //* operation can be either 'GET' or 'SET', meaning a getter or setter db operation
-//* goal can be either 'LIKES' or 'DISLIKES', meaning what is the above operation acting on
+//* goal can be either 'LIKE' or 'DISLIKE', meaning what is the above operation acting on
 //
 
 //grab the CSRF Token
