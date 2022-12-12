@@ -1,5 +1,3 @@
-
-
 $(document).ready(() => {
 
     /* This code implements custom data attributes for HTML elements which temporarily *
@@ -32,9 +30,6 @@ const copyProfileLink = (profileID) => {
 
 
 const followUser = (userID) => {
-    //grab the CSRF Token
-    const CSRFToken = $('meta[name="_token"]').attr('content')
-
     $.post({
         headers: {'X-CSRFToken': CSRFToken},
         // TODO

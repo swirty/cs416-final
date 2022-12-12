@@ -13,9 +13,6 @@ function getBoth(postID){
 }
 
 function getLikes(postID){
-    //grab the CSRF Token
-    const CSRFToken = $('meta[name="_token"]').attr('content')
-
     const post = $(`#` + postID.toString() + `-likes`);
     $.post({
         headers: {'X-CSRFToken': CSRFToken},
@@ -29,9 +26,6 @@ function getLikes(postID){
 }
 
 function getDislikes(postID){
-    //grab the CSRF Token
-    const CSRFToken = $('meta[name="_token"]').attr('content')
-
     const post = $(`#` + postID.toString() + `-dislikes`);
     $.post({
         headers: {'X-CSRFToken': CSRFToken},
@@ -45,9 +39,6 @@ function getDislikes(postID){
 }
 
 function setLikes(postID, userID){
-    //grab the CSRF Token
-    const CSRFToken = $('meta[name="_token"]').attr('content')
-
     const post = $(`#` + postID.toString() + `-likes`);
     $.post({
         headers: {'X-CSRFToken': CSRFToken},
@@ -61,9 +52,6 @@ function setLikes(postID, userID){
 }
 
 function setDislikes(postID, userID){
-    //grab the CSRF Token
-    const CSRFToken = $('meta[name="_token"]').attr('content')
-
     const post = $(`#` + postID.toString() + `-dislikes`);
     $.post({
         headers: {'X-CSRFToken': CSRFToken},
@@ -78,15 +66,11 @@ function setDislikes(postID, userID){
 
 // AJAX call for adding and removing a follow
 function setFollow(followerID, followedID){
-    //grab the CSRF Token
-    const CSRFToken = $('meta[name="_token"]').attr('content')
 
 }
 
 //AJAX call for deleting a post
 function deletePost(postID){
-    //grab the CSRF Token
-    const CSRFToken = $('meta[name="_token"]').attr('content')
 
 }
 
