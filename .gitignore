@@ -9,3 +9,4 @@ db.sqlite3
 q
 static/images/*
 !static/images/default-pro-pic.png
+!static/images/default-banner-pic.png

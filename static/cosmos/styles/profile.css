@@ -1,0 +1,7 @@
+img.profile-pro-pic{
+    border-style: solid;
+    border-width: 15px;
+    border-color: var(--neutral-div-bg-color);
+    transform: translateY(-50%);
+}
+
