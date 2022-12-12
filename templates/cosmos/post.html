@@ -1,4 +1,6 @@
 {% load static %}
+<!-- Holds the CSRF Token for posts.js -->
+<meta name="_token" content="{{ csrf_token }}">
 <div class="col-6 rounded shadow m-3 p-3 post">
 
   <!-- Post Header -->
@@ -21,13 +23,15 @@
       </div>
     </div>
 
-    <!-- Share Button -->
+    <!-- Dropdown Menu -->
     <div class="col d-flex justify-content-end p-0">
       <div class="dropdown">
         <button class="btn btn-load dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
       <ul class="dropdown-menu dropdown-menu-dark">
-        <li><a class="dropdown-item" href="#">Share</a></li>
-        <li><a class="dropdown-item" href="#">Delete</a></li>
+        <li><span onclick="copyLink({% url 'queryPost' post.id %})" class="dropdown-item">Share</span></li>
+          {% if post.user == current_user %}
+            <li><span class="dropdown-item">Delete</span></li>
+          {% endif %}
   </ul>
 </div>
     </div>
