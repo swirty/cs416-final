@@ -9,14 +9,13 @@
 #    return render(request, 'cosmos/user-profile.html', context)
 from django.shortcuts import render, redirect
 from .models import Post
-from CS416FinalProject.forms import UpdateUserForm, CreateUserForm, create_post_form
+from .forms import create_post_form
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import CreatePostForm
 from .models import Post, Reaction, User
 
 @login_required(login_url='login')
