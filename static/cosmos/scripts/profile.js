@@ -1,5 +1,3 @@
-const CSRFToken = $('meta[name="_token"]').attr('content')
-
 $(document).ready(() => {
 
     /* This code implements custom data attributes for HTML elements which temporarily *

@@ -9,18 +9,15 @@
 #    return render(request, 'cosmos/user-profile.html', context)
 from django.shortcuts import render, redirect
 from .models import Post
-from CS416FinalProject.forms import UpdateUserForm, CreateUserForm, create_post_form
+from .forms import create_post_form
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.csrf import csrf_exempt
 
 from CS416FinalProject.forms import create_post_form
 from .models import Post, Reaction, User
-
-
 
 @login_required(login_url='login')
 def home(request):
@@ -84,6 +81,7 @@ def create_reply(request, other_post=None):
     return render(request, 'cosmos/create-post.html', context)
 
 # the worst function in the entire project
+@login_required(login_url='login')
 def reactionAJAXOperations(request):
     def likeReturn(postID):
         return HttpResponse(Reaction.objects.filter(reaction='LIKE', post_id=postID).count())
@@ -92,8 +90,9 @@ def reactionAJAXOperations(request):
         return HttpResponse(Reaction.objects.filter(reaction='DISLIKE', post_id=postID).count())
 
     if request.method == 'GET':
-        return None
+        return redirect('landing')
 
+    # setter db operations
     if request.POST['operation'] == 'SET':
         # get the reaction associated with this post and user
         react = Reaction.objects.filter(reaction=request.POST['goal'], post_id=request.POST['postID'], user_id=request.POST['userID'])
@@ -106,6 +105,7 @@ def reactionAJAXOperations(request):
             # yes, delete it
             react[0].delete()
 
+    #getter db operations
     if request.POST['goal'] == 'LIKE':
         return likeReturn(request.POST['postID'])
 

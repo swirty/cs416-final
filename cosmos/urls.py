@@ -6,10 +6,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.home, name='landing'),
     path('post/create', views.create_post, name='create_post'),
-    path('post/reply/<int:other_post>', views.create_reply, name='create_reply'),
-    path('post/<int:view_post>', views.show_post, name='queryPost'),
+    path('post/reply/<int:other_post>/', views.create_reply, name='create_reply'),
+    path('post/<int:view_post>/', views.show_post, name='queryPost'),
     path('post/ajax', views.reactionAJAXOperations, name='ajaxPost'),
-    path('user/<int:profile_user>', views.user_profile, name='queryUser'),
+    path('user/<int:profile_user>/', views.user_profile, name='queryUser'),
     path('user/', views.user_profile, name='queryUser'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_URL)
 

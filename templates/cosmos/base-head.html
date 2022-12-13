@@ -19,6 +19,10 @@
   <link rel="stylesheet" href="{% static 'cosmos/styles/posts.css' %}">
   <link rel="stylesheet" href="{% static 'cosmos/styles/profile.css' %}">
 
+  <!-- CSRF token grabbing -->
+  <meta name="_token" content="{{ csrf_token }}">
+  <script src="{% static 'cosmos/scripts/csrf.js' %}"></script>
+
   <!-- Additional Header Content -->
   {% block header %}
   {% endblock %}
