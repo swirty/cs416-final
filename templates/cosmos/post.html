@@ -25,18 +25,18 @@
 
     <!-- Dropdown Menu -->
     <div class="col d-flex justify-content-end p-0">
-      <div class="dropdown d-flex btn-group">
+      <div class="dropdown d-flex btn-group h-50">
         {% if post.user != current_user %}
           <button class="btn btn-load">Follow</button>
         {% endif %}
-        <button class="btn btn-load dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-      <ul class="dropdown-menu dropdown-menu-dark">
-        <li><span onclick="copyLink({% url 'queryPost' post.id %})" class="dropdown-item">Share</span></li>
+        <button class="btn btn-load dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+          <li><span onclick="copyLink({% url 'queryPost' post.id %})" class="dropdown-item">Share</span></li>
           {% if post.user == current_user %}
             <li><span class="dropdown-item">Delete</span></li>
           {% endif %}
-  </ul>
-</div>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -44,7 +44,7 @@
 
   <!-- Post Body -->
   <div class="row m-2">
-    <p>{{ post.post_body }}</p>
+    <p class="lead fs-4">{{ post.post_body }}</p>
   </div>
 
   <!-- Post Image -->
@@ -59,14 +59,14 @@
     <div class="col d-flex justify-content-center p-0">
       <button class="btn btn-outline-like" onclick="setLikes({{ post.id }}, {{ current_user.id }})" style="height:48px;font-size:1.5em;">
         <i class="bi bi-hand-thumbs-up-fill"></i>
-          <span id="{{ post.id }}-likes"></span>
+        <span id="{{ post.id }}-likes"></span>
       </button>
     </div>
     <!-- Dislike -->
     <div class="col d-flex justify-content-center p-0">
       <button class="btn btn-outline-dislike" onload="getDislikes({{ post.id }})" onclick="setDislikes({{ post.id }}, {{ current_user.id }})" style="height:48px;font-size:1.5em;">
         <i class="bi bi-hand-thumbs-down-fill"></i>
-          <span id="{{ post.id }}-dislikes"></span>
+        <span id="{{ post.id }}-dislikes"></span>
       </button>
     </div>
     <!-- Thread -->

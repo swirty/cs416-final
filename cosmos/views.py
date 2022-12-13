@@ -17,7 +17,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
-from CS416FinalProject.forms import CreatePostForm
+from CS416FinalProject.forms import create_post_form
 from .models import Post, Reaction, User
 
 
