@@ -8,7 +8,7 @@
     <!-- Pfp -->
     <div class="col-2 d-flex px-0">
       <a href="/user/{{ post.user_id }}">
-        <img src="{{ post.user.profile.pro_pic.url }}" class="rounded-circle img-fluid">
+        <img src="{{ post.user.profile.pro_pic.url }}" id="pro-pic-{{ post.user_id }}" class="rounded-circle img-fluid">
       </a>
     </div>
 
@@ -83,5 +83,5 @@
   </div>
 
   <!-- Initialize Post -->
-  <script onload="retrievePostReactions({{ post.id }})"></script>
+  <script>retrievePostReactions({{ post.id }})</script>
 </div>

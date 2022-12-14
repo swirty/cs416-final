@@ -100,3 +100,10 @@ function deletePost(postID){
 const copyPostLink = (postID) => {
     navigator.clipboard.writeText(window.location.host + "/post/" + postID);
 };
+
+
+
+/* This function makes an AJAX request which retrieves a number of posts that come after the specified ID. */
+const retrieveMorePosts = (afterID, number) => {
+    
+}

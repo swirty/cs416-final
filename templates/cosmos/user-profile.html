@@ -27,16 +27,17 @@
     <!-- Profile -->
     <div class="row justify-content-center my-4">
       <div class="col-10 d-flex card post p-0" style="border-top: none;">
-        <img src="{{ profile_user.profile.banner_pic.url }}" alt="" class="card-img-top">
+        <img src="{{ profile_user.profile.banner_pic.url }}" id="banner-pic-{{ profile_user.id }}" alt="" class="card-img-top">
         <div class="row ms-3">
           <div class="col-2 px-3" style="height: 0;">
-            <img src="{{ profile_user.profile.pro_pic.url }}" alt="" class="rounded-circle img-fluid profile-pro-pic">
+            <img src="{{ profile_user.profile.pro_pic.url }}" id="pro-pic-{{ profile_user.id }}" alt="" class="rounded-circle img-fluid profile-pro-pic">
           </div>
         </div>
         <div class="row mx-3 mb-3">
           <div class="col-2 p-3 text-center">
             <div style="height: 4.0em;"></div>
             <h6>{{ profile_user.username }}</h6>
+            <hr>
             <p class="my-0">User since</p>
             <p class="my-0">{{ profile_user.date_joined.date }}</p>
           </div>
