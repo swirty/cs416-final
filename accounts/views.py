@@ -15,6 +15,7 @@ def edit_user(request):
     context = {'current_user': request.user,
                'form': form,
                'header_flavor': 'Update Your Account',
+               'url_flavor': 'edit_user',
                'button_flavor': 'Save Changes'}
     if request.method == 'POST':
         if form.is_valid():
@@ -41,6 +42,7 @@ def create_user(request):
             return render(request, 'registration/success.html', context={'success_flavor': 'User Created Successfully'})
     context = {'form': CreateUserForm(),
                'header_flavor': 'Create Your Account',
+               'url_flavor': 'create_user',
                'button_flavor': 'Create Account'}
     return render(request, 'registration/edit-create-user.html', context)
 
