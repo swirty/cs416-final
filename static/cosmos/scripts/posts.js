@@ -6,13 +6,17 @@
 //* goal can be either 'LIKE' or 'DISLIKE', meaning what is the above operation acting on
 //
 
+
+
 //for page initialization
-function getBoth(postID){
-    getLikes(postID);
-    getDislikes(postID);
+function retrievePostReactions(postID){
+    retrievePostLikes(postID);
+    retrievePostDislikes(postID);
 }
 
-function getLikes(postID){
+
+
+function retrievePostLikes(postID){
     const post = $(`#` + postID.toString() + `-likes`);
     $.post({
         headers: {'X-CSRFToken': CSRFToken},
@@ -25,7 +29,9 @@ function getLikes(postID){
     })
 }
 
-function getDislikes(postID){
+
+
+function retrievePostDislikes(postID){
     const post = $(`#` + postID.toString() + `-dislikes`);
     $.post({
         headers: {'X-CSRFToken': CSRFToken},
@@ -37,6 +43,8 @@ function getDislikes(postID){
         }
     })
 }
+
+
 
 function setLikes(postID, userID){
     const post = $(`#` + postID.toString() + `-likes`);
@@ -51,6 +59,8 @@ function setLikes(postID, userID){
     })
 }
 
+
+
 function setDislikes(postID, userID){
     const post = $(`#` + postID.toString() + `-dislikes`);
     $.post({
@@ -64,17 +74,36 @@ function setDislikes(postID, userID){
     })
 }
 
+
+
 // AJAX call for adding and removing a follow
 function setFollow(followerID, followedID){
 
 }
+
+
+
+const retrieveProfileFollows = (profileID) => {
+    // TODO
+}
+
+
 
 //AJAX call for deleting a post
 function deletePost(postID){
 
 }
 
-// Copies link to clipboard
-function copyLink(copyLink){
-    navigator.clipboard.writeText(copyLink.toString())
+
+
+/* This function copies to the clipboard a link to the post with the specified post ID. */
+const copyPostLink = (postID) => {
+    navigator.clipboard.writeText(window.location.host + "/post/" + postID);
+};
+
+
+
+/* This function makes an AJAX request which retrieves a number of posts that come after the specified ID. */
+const retrieveMorePosts = (afterID, number) => {
+    
 }

@@ -27,16 +27,17 @@
     <!-- Profile -->
     <div class="row justify-content-center my-4">
       <div class="col-10 d-flex card post p-0" style="border-top: none;">
-        <img src="{{ profile_user.profile.banner_pic.url }}" alt="" class="card-img-top">
+        <img src="{{ profile_user.profile.banner_pic.url }}" id="banner-pic-{{ profile_user.id }}" alt="" class="card-img-top">
         <div class="row ms-3">
           <div class="col-2 px-3" style="height: 0;">
-            <img src="{{ profile_user.profile.pro_pic.url }}" alt="" class="rounded-circle img-fluid profile-pro-pic">
+            <img src="{{ profile_user.profile.pro_pic.url }}" id="pro-pic-{{ profile_user.id }}" alt="" class="rounded-circle img-fluid profile-pro-pic">
           </div>
         </div>
         <div class="row mx-3 mb-3">
           <div class="col-2 p-3 text-center">
             <div style="height: 4.0em;"></div>
             <h6>{{ profile_user.username }}</h6>
+            <hr>
             <p class="my-0">User since</p>
             <p class="my-0">{{ profile_user.date_joined.date }}</p>
           </div>
@@ -44,10 +45,16 @@
             <h5>About Me</h5>
             <p>{{ profile_user.profile.about }}</p>
           </div>
-          <div class="d-flex col-2 p-3 justify-content-center" style="flex-direction: column">
-            <button class="btn btn-load w-100 h-25" data-cosmos-disable-delay="Link copied!" data-cosmos-disable-delay-duration="750" onclick="copyProfileLink({{ profile_user.id }})">Copy Link</button>
+
+          <!-- Profile Controls -->
+          <div class="d-flex col-2 p-3 mt-3 justify-content-center" style="flex-direction: column">
+            <button class="btn btn-load w-100 h-50 fs-6" data-cosmos-disable-delay="Link copied!" data-cosmos-disable-delay-duration="750" onclick="copyProfileLink({{ profile_user.id }})">Copy Link</button>
             <div class="h-25"></div>
-            <button class="btn btn-load w-100 h-25" data-cosmos-disable-delay data-cosmos-disable-delay-duration="750">Follow</button>
+            <button class="btn btn-load w-100 h-50" data-cosmos-disable-delay data-cosmos-disable-delay-duration="750">Follow</button>
+            {% if profile_user.id == current_user.id %}
+              <div class="h-25"></div>
+              <button class="btn btn-load w-100 h-50">Edit Profile</button>
+            {% endif %}
           </div>
         </div>
       </div>

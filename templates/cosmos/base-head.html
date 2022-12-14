@@ -16,12 +16,19 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
   <!-- Stylesheet import -->
+  <link rel="stylesheet" href="{% static 'cosmos/styles/cosmos.css' %}">
   <link rel="stylesheet" href="{% static 'cosmos/styles/posts.css' %}">
   <link rel="stylesheet" href="{% static 'cosmos/styles/profile.css' %}">
 
   <!-- CSRF token grabbing -->
   <meta name="_token" content="{{ csrf_token }}">
   <script src="{% static 'cosmos/scripts/csrf.js' %}"></script>
+
+  <!-- Custom HTML tag dataset attributes -->
+  <script src="{% static 'cosmos/scripts/cosmos-tag-attributes.js' %}"></script>
+
+  <!-- Behavior for posts -->
+  <script src="{% static 'cosmos/scripts/posts.js' %}"></script>
 
   <!-- Additional Header Content -->
   {% block header %}

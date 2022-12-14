@@ -8,7 +8,7 @@
     <!-- Pfp -->
     <div class="col-2 d-flex px-0">
       <a href="/user/{{ post.user_id }}">
-        <img src="{{ post.user.profile.pro_pic.url }}" class="rounded-circle img-fluid">
+        <img src="{{ post.user.profile.pro_pic.url }}" id="pro-pic-{{ post.user_id }}" class="rounded-circle img-fluid">
       </a>
     </div>
 
@@ -29,10 +29,10 @@
           <button class="btn btn-load">Follow</button>
         {% endif %}
         <button class="btn btn-load dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-        <ul class="dropdown-menu dropdown-menu-dark">
-          <li><span onclick="copyLink({% url 'queryPost' post.id %})" class="dropdown-item">Share</span></li>
+        <ul class="dropdown-menu dropdown-menu-center dropdown-menu-primary">
+          <li class="user-select-none"><span onclick="copyPostLink({{ post.id }})" class="dropdown-item">Share</span></li>
           {% if post.user == current_user %}
-            <li><span class="dropdown-item">Delete</span></li>
+            <li class="user-select-none"><span class="dropdown-item">Delete</span></li>
           {% endif %}
         </ul>
       </div>
@@ -56,21 +56,21 @@
   <div class="row d-flex mt-4 justify-content-between">
     <!-- Like -->
     <div class="col d-flex justify-content-center p-0">
-      <button class="btn btn-outline-like" onclick="setLikes({{ post.id }}, {{ current_user.id }})" style="height:48px;font-size:1.5em;">
+      <button class="btn btn-outline-like" data-cosmos-disable-delay data-cosmos-disable-delay-duration="750" onload="getLikes({{ post.id }})" onclick="setLikes({{ post.id }}, {{ current_user.id }})" style="height:48px;font-size:1.5em;">
         <i class="bi bi-hand-thumbs-up-fill"></i>
         <span id="{{ post.id }}-likes"></span>
       </button>
     </div>
     <!-- Dislike -->
     <div class="col d-flex justify-content-center p-0">
-      <button class="btn btn-outline-dislike" onload="getDislikes({{ post.id }})" onclick="setDislikes({{ post.id }}, {{ current_user.id }})" style="height:48px;font-size:1.5em;">
+      <button class="btn btn-outline-dislike" data-cosmos-disable-delay data-cosmos-disable-delay-duration="750" onload="getDislikes({{ post.id }})" onclick="setDislikes({{ post.id }}, {{ current_user.id }})" style="height:48px;font-size:1.5em;">
         <i class="bi bi-hand-thumbs-down-fill"></i>
         <span id="{{ post.id }}-dislikes"></span>
       </button>
     </div>
     <!-- Thread -->
     <div class="col d-flex justify-content-center p-0">
-      <a class="btn btn-outline-info" href="{% url 'queryPost' post.id %}" style="height:48px;font-size:1.5em;">
+      <a class="btn btn-outline-info" href="{% url 'query_post' post.id %}" style="height:48px;font-size:1.5em;">
         <span class="bi bi-chat-square-quote-fill"></span>
       </a>
     </div>
@@ -81,5 +81,7 @@
       </a>
     </div>
   </div>
+
+  <!-- Initialize Post -->
+  <script>retrievePostReactions({{ post.id }})</script>
 </div>
-<script src="{% static 'cosmos/scripts/posts.js' %}" onload="getBoth({{ post.id }})"></script>
