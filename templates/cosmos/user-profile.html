@@ -22,10 +22,10 @@
   {% include "cosmos/navbar.html" with current_user=current_user %}
 
   <!-- Profile and Posts -->
-  <div class="container my-4">
+  <div class="container mt-4">
 
     <!-- Profile -->
-    <div class="row justify-content-center my-4">
+    <div class="row justify-content-center my-3">
       <div class="col-10 d-flex card post p-0" style="border-top: none;">
         <img src="{{ profile_user.profile.banner_pic.url }}" alt="user banner picture" class="card-img-top banner-pic-{{ profile_user.id }}">
         <div class="row ms-3">
@@ -62,21 +62,7 @@
 
     <!-- Posts -->
     <div class="row justify-content-center">
-      {% if posts %}
-        {% for post in posts %}
-          {% include "cosmos/post.html" with post=post current_user=current_user %}
-        {% endfor %}
-      <div class="col-6 d-flex justify-content-center align-items-center" style="height:150px;">
-        <button class="btn btn-load w-50">
-          <span><i class="bi bi-arrow-down-short"></i>&nbsp;Load more posts&nbsp;<i class="bi bi-arrow-down-short"></i></span>
-        </button>
-      </div>
-      {% else %}
-        <div class="col-8 post">
-          <h1>I haven't made any posts yet!</h1>
-          <h4>Check back later...</h4>
-        </div>
-      {% endif %}
+      {% include "cosmos/post-render-container.html" with post=post current_user=current_user user_has_posts=user_has_posts profile_user=profile_user %}
     </div>
   </div>
 {% endblock %}
