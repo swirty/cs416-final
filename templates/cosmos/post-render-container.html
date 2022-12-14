@@ -1,0 +1,22 @@
+{% load static %}
+{% load cosmos_ids %}
+
+{% if posts %}
+  {% for post in posts %}
+    {% include "cosmos/post.html" with post=post current_user=current_user %}
+  {% endfor %}
+  <div class="col-6 d-flex justify-content-center align-items-center" id="load-more-posts-container" style="height:150px;">
+    <button class="btn btn-load w-50" id="load-more-posts-button" onclick="retrieveMorePosts({{ posts|last_id }}, {{ profile_user.id }}, 1)">
+      <span><i class="bi bi-arrow-down-short"></i>&nbsp;Load more posts&nbsp;<i class="bi bi-arrow-down-short"></i></span>
+    </button>
+  </div>
+{% else %}
+  <div class="col-8 p-3 mb-5 post rounded text-center">
+    {% if user_has_posts %}
+      <h1>No more posts to show!</h1>
+      {% else %}
+      <h1>I haven't posted anything yet!</h1>
+    {% endif %}
+    <h4>Check back later...</h4>
+  </div>
+{% endif %}

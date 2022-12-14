@@ -9,6 +9,7 @@ urlpatterns = [
     path('post/reply/<int:other_post>/', views.create_reply, name='create_reply'),
     path('post/<int:view_post>/', views.show_post, name='query_post'),
     path('post/ajax', views.reactionAJAXOperations, name='ajaxPost'),
+    path('post/loadmore', views.next_n_posts, name='load_more_posts'),
     path('user/<int:profile_user>/', views.user_profile, name='queryUser'),
     path('user/', views.user_profile, name='queryUser'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_URL)

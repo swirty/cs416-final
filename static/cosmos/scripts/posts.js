@@ -104,6 +104,15 @@ const copyPostLink = (postID) => {
 
 
 /* This function makes an AJAX request which retrieves a number of posts that come after the specified ID. */
-const retrieveMorePosts = (afterID, number) => {
-    
+const retrieveMorePosts = (afterID, userID, number) => {
+    $.post({
+        headers: {'X-CSRFToken': CSRFToken},
+        url: "/post/loadmore",
+        data: {postID: afterID, userID: userID, numberOfPosts: number},
+        success: function (data){
+            //alert(data);
+            $('#load-more-posts-container').remove()
+            $('[data-cosmos-post=' + afterID + ']').after(data)
+        }
+    })
 }

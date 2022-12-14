@@ -13,4 +13,5 @@ const followUser = (userID) => {
         headers: {'X-CSRFToken': CSRFToken},
         // TODO
     })
+
 }
