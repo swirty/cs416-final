@@ -32,7 +32,7 @@
         <ul class="dropdown-menu dropdown-menu-center dropdown-menu-primary">
           <li class="user-select-none"><span onclick="copyPostLink({{ post.id }})" class="dropdown-item">Share</span></li>
           {% if post.user == current_user %}
-            <li class="user-select-none"><span class="dropdown-item">Delete</span></li>
+            <li class="user-select-none"><span onclick="deletePost({{ post.id }}, {{ post.user_id }})" class="dropdown-item">Delete</span></li>
           {% endif %}
         </ul>
       </div>
@@ -43,7 +43,7 @@
 
   <!-- Post Body -->
   <div class="row m-2">
-    <p class="lead fs-4">{{ post.post_body }}</p>
+    <p class="lead fs-4" id="post-body-{{ post.id }}">{{ post.post_body }}</p>
   </div>
 
   <!-- Post Image -->

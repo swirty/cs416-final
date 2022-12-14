@@ -20,7 +20,7 @@ function retrievePostLikes(postID){
     const post = $(`#` + postID.toString() + `-likes`);
     $.post({
         headers: {'X-CSRFToken': CSRFToken},
-        url: "/post/ajax",
+        url: "/post/react",
         data: {postID: postID, operation: 'GET', goal: 'LIKE'},
         success: function (data){
             //alert(data);
@@ -35,7 +35,7 @@ function retrievePostDislikes(postID){
     const post = $(`#` + postID.toString() + `-dislikes`);
     $.post({
         headers: {'X-CSRFToken': CSRFToken},
-        url: "/post/ajax",
+        url: "/post/react",
         data: {postID: postID, operation: 'GET', goal: 'DISLIKE'},
         success: function (data){
             //alert(data);
@@ -50,7 +50,7 @@ function setLikes(postID, userID){
     const post = $(`#` + postID.toString() + `-likes`);
     $.post({
         headers: {'X-CSRFToken': CSRFToken},
-        url: "/post/ajax",
+        url: "/post/react",
         data: {postID: postID, userID: userID, operation: 'SET', goal: 'LIKE'},
         success: function (data){
             //alert(data);
@@ -65,7 +65,7 @@ function setDislikes(postID, userID){
     const post = $(`#` + postID.toString() + `-dislikes`);
     $.post({
         headers: {'X-CSRFToken': CSRFToken},
-        url: "/post/ajax",
+        url: "/post/react",
         data: {postID: postID, userID: userID, operation: 'SET', goal: 'DISLIKE'},
         success: function (data){
             //alert(data);
@@ -90,8 +90,18 @@ const retrieveProfileFollows = (profileID) => {
 
 
 //AJAX call for deleting a post
-function deletePost(postID){
-
+const deletePost = (postID, userID) => {
+    const post = $("#post-body-" + postID)
+    $.post({
+        headers: {'X-CSRFToken': CSRFToken},
+        url: "/post/delete",
+        data: {postID: postID, userID: userID},
+        success: function (data){
+            if(parseInt(data) === 0) {
+                post.attr('style', 'color: red').text("Post Deleted!")
+            }
+        }
+    })
 }
 
 

@@ -148,3 +148,28 @@ def reaction_AJAX_operations(request):
 
     if request.POST['goal'] == 'DISLIKE':
         return dislike_return(request.POST['postID'])
+
+@login_required(login_url='login')
+def delete_post(request):
+    if request.method == 'GET':
+        return redirect('landing')
+
+    post_object = Post.objects.get(id=request.POST['postID'])
+
+    # Does the post exist?
+    if post_object is None:
+        return HttpResponse(1)
+
+    # print('post exists')
+
+    # Does the request user own the post?
+    if post_object.user_id != int(request.POST['userID']):
+        return HttpResponse(1)
+
+    # print('user owns post')
+
+    # Delete the post and return success
+    post_object.delete()
+    # print('post deleted')
+
+    return HttpResponse(0)
