@@ -23,6 +23,12 @@
   <meta name="_token" content="{{ csrf_token }}">
   <script src="{% static 'cosmos/scripts/csrf.js' %}"></script>
 
+  <!-- Custom HTML tag dataset attributes -->
+  <script src="{% static 'cosmos/scripts/cosmos-tag-attributes.js' %}"></script>
+
+  <!-- Behavior for posts -->
+  <script src="{% static 'cosmos/scripts/posts.js' %}"></script>
+
   <!-- Additional Header Content -->
   {% block header %}
   {% endblock %}

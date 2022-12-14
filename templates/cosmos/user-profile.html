@@ -44,10 +44,16 @@
             <h5>About Me</h5>
             <p>{{ profile_user.profile.about }}</p>
           </div>
-          <div class="d-flex col-2 p-3 justify-content-center" style="flex-direction: column">
-            <button class="btn btn-load w-100 h-25" data-cosmos-disable-delay="Link copied!" data-cosmos-disable-delay-duration="750" onclick="copyProfileLink({{ profile_user.id }})">Copy Link</button>
+
+          <!-- Profile Controls -->
+          <div class="d-flex col-2 p-3 mt-3 justify-content-center" style="flex-direction: column">
+            <button class="btn btn-load w-100 h-50 fs-6" data-cosmos-disable-delay="Link copied!" data-cosmos-disable-delay-duration="750" onclick="copyProfileLink({{ profile_user.id }})">Copy Link</button>
             <div class="h-25"></div>
-            <button class="btn btn-load w-100 h-25" data-cosmos-disable-delay data-cosmos-disable-delay-duration="750">Follow</button>
+            <button class="btn btn-load w-100 h-50" data-cosmos-disable-delay data-cosmos-disable-delay-duration="750">Follow</button>
+            {% if profile_user.id == current_user.id %}
+              <div class="h-25"></div>
+              <button class="btn btn-load w-100 h-50">Edit Profile</button>
+            {% endif %}
           </div>
         </div>
       </div>
