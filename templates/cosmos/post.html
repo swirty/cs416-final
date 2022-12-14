@@ -7,15 +7,15 @@
 
     <!-- Pfp -->
     <div class="col-2 d-flex px-0">
-      <a href="/user/{{ post.user_id }}">
-        <img src="{{ post.user.profile.pro_pic.url }}" id="pro-pic-{{ post.user_id }}" class="rounded-circle img-fluid">
+      <a href="{% url 'queryUser' post.user_id%}">
+        <img src="{{ post.user.profile.pro_pic.url }}" alt="user profile picture" class="rounded-circle img-fluid pro-pic-{{ post.user_id }}">
       </a>
     </div>
 
     <!-- Username / Date Posted -->
     <div class="col d-flex align-items-center">
       <div>
-        <a class="text-white text-decoration-none" href="/user/{{ post.user_id }}">
+        <a class="text-white text-decoration-none" href="{% url 'queryUser' post.user_id%}">
           <h3>{{ post.user.username }}</h3>
         </a>
         <h6 class="">{{ post.posted_at }}</h6>
