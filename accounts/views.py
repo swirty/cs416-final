@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 from .forms import UpdateUserForm, CreateUserForm
+from .models import Profile
 
 
 # IMPORTANT NOTE ABOUT LOGIN AND 'login.html': Django will automagically look in templates/registration/ for login.html!
@@ -43,6 +44,7 @@ def create_user(request):
             password_hash = make_password(form.cleaned_data['password'])
             user = User(username=username, password=password_hash)
             user.save()
+            Profile(user=user).save()
             return render(request, 'registration/success.html', context={'success_flavor': 'User Created Successfully'})
     context = {'form': CreateUserForm(),
                'header_flavor': 'Create Your Account',
