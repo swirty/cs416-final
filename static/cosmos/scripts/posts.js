@@ -65,7 +65,7 @@ function setDislikes(postID, userID){
     const post = $(`#` + postID.toString() + `-dislikes`);
     $.post({
         headers: {'X-CSRFToken': CSRFToken},
-        url: "/post/create",
+        url: "/post/react",
         data: {postID: postID, userID: userID, operation: 'SET', goal: 'DISLIKE'},
         success: function (data){
             //alert(data);
