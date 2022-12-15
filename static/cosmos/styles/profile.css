@@ -1,3 +1,12 @@
+:root {
+    --neutral-body-bg-color: #221e38;
+    --neutral-div-bg-color: #443c6f;
+    --neutral-nav-bg-color: #8877dd;
+    --neutral-light-color: #aa88ff;
+    --btn-like: #64d200;
+    --btn-dislike: #ff4646;
+}
+
 img.profile-pro-pic{
     border-style: solid;
     border-width: 15px;
@@ -5,3 +14,28 @@ img.profile-pro-pic{
     transform: translateY(-50%);
 }
 
+img.pro-pic, img.profile-pro-pic{
+    background-color: var(--neutral-body-bg-color);
+}
+
+button.btn-edit-banner-pic{
+    transform: translate(-50%, -150%);
+}
+
+button.btn-edit-pro-pic{
+    transform: translate(100%, 50%);
+    z-index: 10;
+    position: absolute;
+}
+
+button.btn-edit-banner-pic, button.btn-edit-pro-pic{
+    height: 48px;
+    width: 48px;
+}
+
+button.btn-edit-about{
+    width: 24px;
+    height: 24px;
+    font-size: 0.5rem;
+    border-radius: 0 !important;
+}

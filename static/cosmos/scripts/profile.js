@@ -1,4 +1,6 @@
+$(document).ready(() => {
 
+})
 
 
 
@@ -19,6 +21,14 @@ const followUser = (fromUserID, toUserID) => {
         }
     })
 }
+
+
+
+const submitForm = (formID) => {
+    $('#' + formID).submit()
+}
+
+
 
 const retrieveFollowState = (fromUserID, toUserID) => {
     const followButton = $("#follow-button")

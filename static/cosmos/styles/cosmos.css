@@ -47,3 +47,11 @@ nav.navbar {
     border-bottom-style: solid;
     border-bottom-width: 5px;*/
 }
+
+div.modal-header.cosmos-modal {
+    border-color: var(--neutral-nav-bg-color);
+}
+
+div.modal-footer.cosmos-modal {
+    border-color: var(--neutral-nav-bg-color);
+}

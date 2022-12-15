@@ -7,6 +7,8 @@
 # def user_page(request, user_id):
 #     context = {'posts': Post.objects.filter(user_id=user_id).order_by('posted_at').reverse()}
 #    return render(request, 'cosmos/user-profile.html', context)
+import json
+
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 
@@ -19,28 +21,65 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import create_post_form
+from accounts.forms import EditProfileForm, EditProfileAboutForm, EditProfileProPicForm, EditProfileBannerPicForm
+from .models import Post, Reaction, Follow
+from accounts.models import Profile
 from .models import Post, Reaction, Follow
 
 
 @login_required(login_url='login')
 def home(request):
-    context = {'posts': list(Post.objects.filter(user=request.user).order_by('posted_at').reverse())[:15],
+    # TODO
+    return redirect('user/' + str(request.user.id))
+
+
+def user_profile(request, profile_user_id=None):
+    if request.method == 'POST' and profile_user_id != None and profile_user_id == request.user.id:
+        form = EditProfileForm(request.POST, instance=Profile.objects.get(user_id=profile_user_id))
+        print('test')
+        if form.is_valid():
+            form.save()
+            #print(str(form.data))
+            #Profile(user_id=profile_user_id, )
+    else:
+        if profile_user_id is None:
+            return redirect('landing')
+        get_object_or_404(User, id=profile_user_id)
+    context = {'posts': list(Post.objects.filter(user=profile_user_id).order_by('posted_at').reverse())[:15],
                'current_user': request.user,
-               'profile_user': request.user,
+               'profile_user': User.objects.get(id=profile_user_id).profile.user,
+               'user_has_posts': Post.objects.filter(user=profile_user_id).count() != 0,
+               'edit_user_profile_about_form': EditProfileAboutForm(),
+               'edit_user_profile_pro_pic_form': EditProfileProPicForm(),
+               'edit_user_profile_banner_pic_form': EditProfileBannerPicForm(),
+               'form': EditProfileForm(),
                'post_form': create_post_form()}
     return render(request, 'cosmos/user-profile.html', context)
 
 
-def user_profile(request, profile_user=None):
-    if request.method == 'POST' or profile_user == request.user.id or profile_user is None:
-        return redirect('landing')
-    get_object_or_404(User, id=profile_user)
-    context = {'posts': list(Post.objects.filter(user=profile_user).order_by('posted_at').reverse())[:15],
-               'current_user': request.user,
-               'profile_user': User.objects.get(id=profile_user).profile.user,
-               'user_has_posts': Post.objects.filter(user=profile_user).count() != 0,
-               'post_form': create_post_form()}
-    return render(request, 'cosmos/user-profile.html', context)
+
+@login_required(login_url='login')
+def edit_user_profile(request, profile_user_id, profile_field):
+    print('edit profile request made')
+    if request.method == 'POST' and profile_user_id == request.user.id:
+        form = None
+        print(profile_user_id)
+        if profile_field == 'about':
+            form = EditProfileAboutForm(request.POST, instance=Profile.objects.get(user_id=profile_user_id))
+            print('\tabout')
+        elif profile_field == 'pro_pic':
+            form = EditProfileProPicForm(request.POST, request.FILES, instance=Profile.objects.get(user_id=profile_user_id))
+            print('\tpro_pic')
+        elif profile_field == 'banner_pic':
+            form = EditProfileBannerPicForm(request.POST, request.FILES, instance=Profile.objects.get(user_id=profile_user_id))
+            print('\tbanner_pic')
+        if form.is_valid():
+            form.save()
+            print('\t\tSAVED')
+        else:
+            print(str(form.data))
+    return redirect('/user/' + str(profile_user_id))
+
 
 
 @login_required(login_url='login')
