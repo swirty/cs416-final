@@ -76,19 +76,6 @@ function setDislikes(postID, userID){
 
 
 
-// AJAX call for adding and removing a follow
-function setFollow(followerID, followedID){
-
-}
-
-
-
-const retrieveProfileFollows = (profileID) => {
-    // TODO
-}
-
-
-
 //AJAX call for deleting a post
 const deletePost = (postID, userID) => {
     const post = $("#post-body-" + postID)

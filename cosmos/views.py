@@ -171,3 +171,24 @@ def delete_post(request):
     # print('post deleted')
 
     return HttpResponse(0)
+
+
+def follow_user(request):
+    if request.method == 'GET':
+        return redirect('landing')
+
+    follow_object = Follow.objects.filter(from_user_id=request.POST['fromUserID'], to_user_id=request.POST['toUserID'])
+
+    if request.POST['operation'] == 'GET':
+        if follow_object.count() == 0:
+            return HttpResponse("Follow")
+        else:
+            return HttpResponse("Unfollow")
+    else:
+        if follow_object.count() == 0:
+            new_follow = Follow(from_user_id=request.POST['fromUserID'], to_user_id=request.POST['toUserID'])
+            new_follow.save()
+            return HttpResponse("Unfollow")
+        else:
+            follow_object[0].delete()
+            return HttpResponse("Follow")

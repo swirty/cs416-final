@@ -53,7 +53,7 @@
           <div class="d-flex col-2 p-3 mt-3 justify-content-center" style="flex-direction: column">
             <button class="btn btn-load w-100 h-50 fs-6" data-cosmos-disable-delay="Link copied!" data-cosmos-disable-delay-duration="750" onclick="copyProfileLink({{ profile_user.id }})">Copy Link</button>
             <div class="h-25"></div>
-            <button class="btn btn-load w-100 h-50" data-cosmos-disable-delay data-cosmos-disable-delay-duration="750">Follow</button>
+            <button class="btn btn-load w-100 h-50" id="follow-button" data-cosmos-disable-delay data-cosmos-disable-delay-duration="750" onclick="followUser({{ current_user.id }}, {{ profile_user.id }})">Follow</button>
             {% if profile_user.id == current_user.id %}
               <div class="h-25"></div>
               <button class="btn btn-load w-100 h-50">Edit Profile</button>
@@ -67,5 +67,8 @@
     <div class="row justify-content-center">
       {% include "cosmos/post-render-container.html" with post=post current_user=current_user user_has_posts=user_has_posts profile_user=profile_user %}
     </div>
+
+    <!-- Initialize Follows -->
+    <script>retrieveFollowState({{ current_user.id }}, {{ profile_user.id }})</script>
   </div>
 {% endblock %}
