@@ -16,7 +16,7 @@ from PIL import ImageOps
 # Each post maps to one user and many reactions.
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    reply = models.ForeignKey('self', blank=True, null=True, on_delete=models.DO_NOTHING)
+    reply = models.ForeignKey('self', null=True, on_delete=models.DO_NOTHING)
     post_body = models.CharField(max_length=250)
     posted_at = models.DateTimeField(auto_now_add=True) # auto_now captures the UPDATE time, as opposed to the CREATION time
 

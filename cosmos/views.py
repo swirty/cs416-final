@@ -24,6 +24,7 @@ from .forms import create_post_form
 from accounts.forms import EditProfileForm, EditProfileAboutForm, EditProfileProPicForm, EditProfileBannerPicForm
 from .models import Post, Reaction, Follow
 from accounts.models import Profile
+from .models import Post, Reaction, Follow
 
 
 @login_required(login_url='login')
@@ -51,7 +52,8 @@ def user_profile(request, profile_user_id=None):
                'edit_user_profile_about_form': EditProfileAboutForm(),
                'edit_user_profile_pro_pic_form': EditProfileProPicForm(),
                'edit_user_profile_banner_pic_form': EditProfileBannerPicForm(),
-               'form': EditProfileForm()}
+               'form': EditProfileForm(),
+               'post_form': create_post_form()}
     return render(request, 'cosmos/user-profile.html', context)
 
 
@@ -90,10 +92,7 @@ def create_post(request):
             post = Post(user=user, post_body=post_body)
             post.save()
             return redirect('/')
-    context = {'form': create_post_form(),
-               'header_flavor': 'Create a Post',
-               'button_flavor': 'Go!'}
-    return render(request, 'cosmos/create-post.html', context)
+    return HttpResponse(create_post_form())
 
 
 @login_required(login_url='login')
@@ -108,7 +107,7 @@ def show_post(request, view_post=None):
 
 
 @login_required(login_url='login')
-def create_reply(request, other_post=None):
+def create_reply(request, other_post):
     if other_post is None:
         return redirect('landing')
     if request.method == 'POST':
@@ -121,8 +120,9 @@ def create_reply(request, other_post=None):
             return redirect('/')
     context = {'form': create_post_form(),
                'header_flavor': 'Create a Post',
-               'button_flavor': 'Go!'}
-    return render(request, 'cosmos/create-post.html', context)
+               'button_flavor': 'Go!',
+               'other_post': other_post}
+    return render(request, 'cosmos/create-reply.html', context)
 
 # Render the next n posts after the specified ID and return them
 # The posts come from the request user's follows if a specific user isn't identified.
@@ -186,3 +186,49 @@ def reaction_AJAX_operations(request):
 
     if request.POST['goal'] == 'DISLIKE':
         return dislike_return(request.POST['postID'])
+
+@login_required(login_url='login')
+def delete_post(request):
+    if request.method == 'GET':
+        return redirect('landing')
+
+    post_object = Post.objects.get(id=request.POST['postID'])
+
+    # Does the post exist?
+    if post_object is None:
+        return HttpResponse(1)
+
+    # print('post exists')
+
+    # Does the request user own the post?
+    if post_object.user_id != int(request.POST['userID']):
+        return HttpResponse(1)
+
+    # print('user owns post')
+
+    # Delete the post and return success
+    post_object.delete()
+    # print('post deleted')
+
+    return HttpResponse(0)
+
+@login_required(login_url='login')
+def follow_user(request):
+    if request.method == 'GET':
+        return redirect('landing')
+
+    follow_object = Follow.objects.filter(from_user_id=request.POST['fromUserID'], to_user_id=request.POST['toUserID'])
+
+    if request.POST['operation'] == 'GET':
+        if follow_object.count() == 0:
+            return HttpResponse("Follow")
+        else:
+            return HttpResponse("Unfollow")
+    else:
+        if follow_object.count() == 0:
+            new_follow = Follow(from_user_id=request.POST['fromUserID'], to_user_id=request.POST['toUserID'])
+            new_follow.save()
+            return HttpResponse("Unfollow")
+        else:
+            follow_object[0].delete()
+            return HttpResponse("Follow")
