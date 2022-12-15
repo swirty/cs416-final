@@ -8,7 +8,7 @@
 
 {% block body %}
     <div class="container d-flex justify-content-center">
-        <form class="m-5 crispy-form" action="{% url 'create_post' %}" method="post">
+        <form class="m-5 crispy-form" action="{% url 'create_reply' other_post %}" method="post">
             <h1 class="text-white">{{ header_flavor }}</h1>
             {% csrf_token %}
             {{ form.post_body|as_crispy_field }}
