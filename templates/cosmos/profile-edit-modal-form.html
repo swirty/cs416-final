@@ -1,0 +1,40 @@
+{% comment %}
+TEMPLATE ARGS:
+  modal_id:string     - The ID to use with a modal button
+  modal_title:string  - The title of the modal
+  form:ModelForm      - The form to be inserted into the modal
+  edit_field:string  - The field to be edited
+  profile_user:User   - The current profile user
+{% endcomment %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<!-- Edit Profile modal dialog -->
+<div class="modal fade" id="{{ modal_id }}" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content post">
+
+      <!-- Header -->
+      <div class="modal-header cosmos-modal">
+        <h1 class="modal-title fs-5" id="{{ modal_id }}-label">{{ modal_title }}</h1>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <div class="div">
+          <form enctype="multipart/form-data" action="/user/edit/{{ profile_user.id }}/{{ edit_field }}/" method="post" class="crispy-form" id="{{ modal_id }}-form">
+            {% csrf_token %}
+            {{ form|crispy }}
+          </form>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer cosmos-modal">
+        <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-outline-like" data-bs-dismiss="modal" onclick="submitForm('{{ modal_id }}-form')">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

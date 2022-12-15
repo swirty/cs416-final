@@ -27,12 +27,16 @@ def edit_user(request):
     return render(request, 'registration/edit-create-user.html', context)
 
 
+@login_required(login_url='login')
+def edit_profile(request, profile_user_id):
+    None
+
+
 def create_user(request):
     if isinstance(request.user.id, int):
         return redirect('/')
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
-
         if form.is_valid():
             username = form.cleaned_data['username']
             password_hash = make_password(form.cleaned_data['password'])

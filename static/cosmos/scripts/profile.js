@@ -1,4 +1,6 @@
+$(document).ready(() => {
 
+})
 
 
 
@@ -14,4 +16,10 @@ const followUser = (userID) => {
         // TODO
     })
 
+}
+
+
+
+const submitForm = (formID) => {
+    $('#' + formID).submit()
 }
