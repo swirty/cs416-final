@@ -19,7 +19,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import create_post_form
-from .models import Post, Reaction, User, Follow
+from .models import Post, Reaction, Follow
 
 
 @login_required(login_url='login')
@@ -68,7 +68,7 @@ def show_post(request, view_post=None):
 
 
 @login_required(login_url='login')
-def create_reply(request, other_post=None):
+def create_reply(request, other_post):
     if other_post is None:
         return redirect('landing')
     if request.method == 'POST':
@@ -81,8 +81,9 @@ def create_reply(request, other_post=None):
             return redirect('/')
     context = {'form': create_post_form(),
                'header_flavor': 'Create a Post',
-               'button_flavor': 'Go!'}
-    return render(request, 'cosmos/create-post.html', context)
+               'button_flavor': 'Go!',
+               'other_post': other_post}
+    return render(request, 'cosmos/create-reply.html', context)
 
 # Render the next n posts after the specified ID and return them
 # The posts come from the request user's follows if a specific user isn't identified.
@@ -172,7 +173,7 @@ def delete_post(request):
 
     return HttpResponse(0)
 
-
+@login_required(login_url='login')
 def follow_user(request):
     if request.method == 'GET':
         return redirect('landing')
