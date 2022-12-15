@@ -24,10 +24,7 @@
 
     <!-- Dropdown Menu -->
     <div class="col d-flex justify-content-end p-0">
-      <div class="dropdown d-flex btn-group h-50">
-        {% if post.user != current_user %}
-          <button class="btn btn-load">Follow</button>
-        {% endif %}
+      <div class="dropdown d-flex h-50">
         <button class="btn btn-load dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
         <ul class="dropdown-menu dropdown-menu-center dropdown-menu-primary">
           <li class="user-select-none"><span onclick="copyPostLink({{ post.id }})" class="dropdown-item">Share</span></li>

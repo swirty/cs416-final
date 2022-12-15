@@ -1,15 +1,15 @@
 <!-- Navbar -->
-  <nav class="navbar shadow fixed-top cosmos-nav">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'landing' %}" style="color: white;"><i class="bi bi-moon-stars-fill"></i>&nbsp;&nbsp;Cosmos</a>
-        <div class="d-flex align-self-end">
-            <h5 class="align-self-center m-1"><span class="badge badge-light justify-self-right">Logged in as {{ current_user.username }}</span></h5>
-            <button type="button" class="fw-bold m-1 btn btn-light" data-bs-toggle="modal" data-bs-target="#modal-post-form">Create Post</button>
-            <a class="fw-bold m-1 btn btn-light" href="{% url 'edit_user' %}">Edit Profile</a>
-            <a class="fw-bold btn btn-light m-1" href="{% url 'logout' %}">Logout?</a>
-        </div>
+<nav class="navbar shadow fixed-top cosmos-nav">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'landing' %}" style="color: white;"><i class="bi bi-moon-stars-fill"></i>&nbsp;&nbsp;Cosmos</a>
+    <div class="d-flex align-self-end">
+      <h5 class="align-self-center m-1"><span class="badge badge-light justify-self-right">Logged in as {{ current_user.username }}</span></h5>
+      <button type="button" class="fw-bold m-1 btn btn-light" data-bs-toggle="modal" data-bs-target="#modal-post-form">Create Post</button>
+      <a class="fw-bold m-1 btn btn-light" href="{% url 'edit_user' %}">Edit Profile</a>
+      <a class="fw-bold btn btn-light m-1" href="{% url 'logout' %}">Logout</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- Navbar Spacer -->
-  <div class="mb-3" style="height:50px;"></div>
+<!-- Navbar Spacer -->
+<div class="mb-3" style="height:50px;"></div>
