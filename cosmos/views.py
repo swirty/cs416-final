@@ -26,8 +26,8 @@ from .models import Post, Reaction, User, Follow
 def home(request):
     context = {'posts': list(Post.objects.filter(user=request.user).order_by('posted_at').reverse())[:15],
                'current_user': request.user,
-               'profile_user': request.user
-               }
+               'profile_user': request.user,
+               'post_form': create_post_form()}
     return render(request, 'cosmos/user-profile.html', context)
 
 
@@ -38,7 +38,8 @@ def user_profile(request, profile_user=None):
     context = {'posts': list(Post.objects.filter(user=profile_user).order_by('posted_at').reverse())[:15],
                'current_user': request.user,
                'profile_user': User.objects.get(id=profile_user).profile.user,
-               'user_has_posts': Post.objects.filter(user=profile_user).count() != 0}
+               'user_has_posts': Post.objects.filter(user=profile_user).count() != 0,
+               'post_form': create_post_form()}
     return render(request, 'cosmos/user-profile.html', context)
 
 
@@ -52,10 +53,7 @@ def create_post(request):
             post = Post(user=user, post_body=post_body)
             post.save()
             return redirect('/')
-    context = {'form': create_post_form(),
-               'header_flavor': 'Create a Post',
-               'button_flavor': 'Go!'}
-    return render(request, 'cosmos/create-post.html', context)
+    return HttpResponse(create_post_form())
 
 
 @login_required(login_url='login')
