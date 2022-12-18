@@ -58,7 +58,7 @@ def create_user(request):
 #         if user_creation_form.is_valid():
 #             user_creation_form.save()
 #             return redirect('landing')
-#     return render(request, 'cosmos/register.html', {'form': user_creation_form})
+#     return render(request, 'cosmos_app/register.html', {'form': user_creation_form})
 #
 # def login_view(request):
 #     auth_form = AuthenticationForm(data=(request.POST or None))
@@ -67,4 +67,4 @@ def create_user(request):
 #             user_credentials = auth_form.get_user()
 #             login(request, user_credentials)
 #             return redirect('landing')
-#     return render(request, 'cosmos/login.html', {'form': auth_form})
+#     return render(request, 'cosmos_app/login.html', {'form': auth_form})

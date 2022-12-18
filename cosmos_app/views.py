@@ -1,12 +1,12 @@
 # @login_required(login_url='login')
 # def home_page(request):
 #     context = {'posts': Post.objects.filter(user=request.user).order_by('posted_at').reverse()}
-#     return render(request, 'cosmos/user-profile.html', context)
+#     return render(request, 'cosmos_app/user-profile.html', context)
 #
 #
 # def user_page(request, user_id):
 #     context = {'posts': Post.objects.filter(user_id=user_id).order_by('posted_at').reverse()}
-#    return render(request, 'cosmos/user-profile.html', context)
+#    return render(request, 'cosmos_app/user-profile.html', context)
 import json
 
 from django.shortcuts import render, redirect
@@ -21,9 +21,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import create_post_form
-from accounts.forms import EditProfileForm, EditProfileAboutForm, EditProfileProPicForm, EditProfileBannerPicForm
+from accounts_app.forms import EditProfileForm, EditProfileAboutForm, EditProfileProPicForm, EditProfileBannerPicForm
 from .models import Post, Reaction, Follow
-from accounts.models import Profile
+from accounts_app.models import Profile
 from .models import Post, Reaction, Follow
 
 

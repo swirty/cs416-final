@@ -10,3 +10,6 @@ q
 static/images/*
 !static/images/default-pro-pic.png
 !static/images/default-banner-pic.png
+Lib
+Scripts
+pyvenv.cfg
