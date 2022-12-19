@@ -1,16 +1,16 @@
 :root {
-    --neutral-body-bg-color: #221e38;
-    --neutral-div-bg-color: #443c6f;
-    --neutral-nav-bg-color: #8877dd;
+    --body-bg: #221e38;
+    --div-bg: #443c6f;
+    --nav-bg: #8877dd;
     --neutral-light-color: #aa88ff;
 }
 
 body {
-    background-color: var(--neutral-body-bg-color);
+    background-color: var(--body-bg);
 }
 
 div.post {
-    background-color: var(--neutral-div-bg-color);
+    background-color: var(--div-bg);
     border-top: 15px ridge var(--neutral-light-color);
     color: white;
 }
@@ -24,5 +24,5 @@ a {
 }
 
 nav.navbar {
-    background-color: var(--neutral-nav-bg-color);
+    background-color: var(--nav-bg);
 }

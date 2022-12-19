@@ -13,14 +13,14 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 
 from .models import Post
-from .forms import create_post_form
+from .forms import CreatePostForm
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import create_post_form
+from .forms import CreatePostForm
 from accounts_app.forms import EditProfileForm, EditProfileAboutForm, EditProfileProPicForm, EditProfileBannerPicForm
 from .models import Post, Reaction, Follow
 from accounts_app.models import Profile
@@ -43,7 +43,10 @@ def user_profile(request, profile_user_id=None):
             #Profile(user_id=profile_user_id, )
     else:
         if profile_user_id is None:
-            return redirect('landing')
+            if request.user.id:
+                return redirect('/user/' + str(request.user.id))
+            else:
+                return redirect('login_page')
         get_object_or_404(User, id=profile_user_id)
     context = {'posts': list(Post.objects.filter(user=profile_user_id).order_by('posted_at').reverse())[:15],
                'current_user': request.user,
@@ -53,7 +56,8 @@ def user_profile(request, profile_user_id=None):
                'edit_user_profile_pro_pic_form': EditProfileProPicForm(),
                'edit_user_profile_banner_pic_form': EditProfileBannerPicForm(),
                'form': EditProfileForm(),
-               'post_form': create_post_form()}
+               'post_form': CreatePostForm()}
+    print(request.user.id)
     return render(request, 'cosmos/user-profile.html', context)
 
 
@@ -85,14 +89,14 @@ def edit_user_profile(request, profile_user_id, profile_field):
 @login_required(login_url='login')
 def create_post(request):
     if request.method == 'POST':
-        form = create_post_form(request.POST)
+        form = CreatePostForm(request.POST)
         if form.is_valid():
             user = request.user
             post_body = form.cleaned_data['post_body']
             post = Post(user=user, post_body=post_body)
             post.save()
             return redirect('/')
-    return HttpResponse(create_post_form())
+    return HttpResponse(CreatePostForm())
 
 
 @login_required(login_url='login')
@@ -111,14 +115,14 @@ def create_reply(request, other_post):
     if other_post is None:
         return redirect('landing')
     if request.method == 'POST':
-        form = create_post_form(request.POST)
+        form = CreatePostForm(request.POST)
         if form.is_valid():
             user = request.user
             post_body = form.cleaned_data['post_body']
             post = Post(reply_id=other_post, user=user, post_body=post_body)
             post.save()
             return redirect('/')
-    context = {'form': create_post_form(),
+    context = {'form': CreatePostForm(),
                'header_flavor': 'Create a Post',
                'button_flavor': 'Go!',
                'other_post': other_post}

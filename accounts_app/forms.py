@@ -38,7 +38,7 @@ class EditProfileAboutForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['about']
-    about = forms.CharField(max_length=250, label='About Me', widget=forms.Textarea)
+    about = forms.CharField(max_length=250, label='About Me', widget=forms.Textarea(attrs={'class': 'cosmos-text-input'}))
 
 
 

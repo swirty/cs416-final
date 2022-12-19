@@ -12,10 +12,7 @@
 
 {% block body %}
   <!-- Navbar -->
-  {% include "cosmos/navbar.html" with current_user=current_user %}
-
-  <!-- Modal Post Form -->
-  {% include 'cosmos/modal-create-post.html' with post_form=post_form %}
+  {% include "cosmos/navbar.html" with current_user=current_user post_form=post_form %}
 
   <!-- Profile and Posts -->
   <div class="container mt-4">
@@ -31,7 +28,7 @@
           <!-- Edit Banner Picture Button -->
           <div class="row" style="height: 0px">
             <div class="d-flex col justify-content-end">
-              <button type="button" class="btn btn-load btn-edit-banner-pic rounded-circle" data-bs-toggle="modal" data-bs-target="#edit-profile-banner-pic-modal">
+              <button type="button" class="btn btn-cosmos btn-edit-banner-pic rounded-circle" data-bs-toggle="modal" data-bs-target="#edit-profile-banner-pic-modal">
                 <i class="bi bi-pencil-fill"></i>
               </button>
               {% include 'cosmos/profile-edit-modal-form.html' with modal_id='edit-profile-banner-pic-modal' modal_title='Edit Banner Picture' form=edit_user_profile_banner_pic_form edit_field='banner_pic' profile_user=profile_user %}
@@ -43,7 +40,7 @@
           <!-- Edit Profile Picture Button -->
           <div class="row" style="height: 0px">
             <div class="col">
-              <button type="button" class="btn btn-load btn-edit-pro-pic rounded-circle" data-bs-toggle="modal" data-bs-target="#edit-profile-pro-pic-modal">
+              <button type="button" class="btn btn-cosmos btn-edit-pro-pic rounded-circle" data-bs-toggle="modal" data-bs-target="#edit-profile-pro-pic-modal">
                 <i class="bi bi-pencil-fill"></i>
               </button>
               {% include 'cosmos/profile-edit-modal-form.html' with modal_id='edit-profile-pro-pic-modal' modal_title='Edit Profile Picture' form=edit_user_profile_pro_pic_form edit_field='pro_pic' profile_user=profile_user %}
@@ -74,14 +71,14 @@
 
           <!-- Profile Controls -->
           <div class="d-flex col-2 p-3 mt-3 justify-content-center" style="flex-direction: column">
-            <button class="btn btn-load w-100 h-50 fs-6" data-cosmos-disable-delay="Link copied!" data-cosmos-disable-delay-duration="750" onclick="copyProfileLink({{ profile_user.id }})">Copy Link</button>
+            <button class="btn btn-cosmos w-100 h-50 fs-6" data-cosmos-disable-delay="Link copied!" data-cosmos-disable-delay-duration="750" onclick="copyProfileLink({{ profile_user.id }})">Copy Link</button>
             <div class="h-25"></div>
-            <button class="btn btn-load w-100 h-50" id="follow-button" data-cosmos-disable-delay data-cosmos-disable-delay-duration="750" onclick="followUser({{ current_user.id }}, {{ profile_user.id }})">Follow</button>
+            <button class="btn btn-cosmos w-100 h-50" id="follow-button" data-cosmos-disable-delay data-cosmos-disable-delay-duration="750" onclick="followUser({{ current_user.id }}, {{ profile_user.id }})">Follow</button>
             {% if profile_user.id == current_user.id %}
               <div class="h-25"></div>
 
               <!-- Edit Profile button -->
-              <button type="button" class="btn btn-load rounded" data-bs-toggle="modal" data-bs-target="#edit-profile-about-modal">
+              <button type="button" class="btn btn-cosmos rounded" data-bs-toggle="modal" data-bs-target="#edit-profile-about-modal">
                 Edit About
               </button>
               {% include 'cosmos/profile-edit-modal-form.html' with modal_id='edit-profile-about-modal' modal_title='Edit About Section' form=edit_user_profile_about_form edit_field='about' profile_user=profile_user %}

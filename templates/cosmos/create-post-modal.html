@@ -4,21 +4,21 @@
 <!-- Modal with form -->
 <div class="modal fade" id="modal-post-form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content post">
       <form class="crispy-form" action="{% url 'create_post' %}" method="post">
         {% csrf_token %}
-        <div class="modal-header">
+        <div class="modal-header cosmos-modal">
           <h1 class="modal-title fs-5">Make A Post</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="form-group">
             {{ post_form|crispy }}
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <input type="submit" class="btn btn-light my-2" value="Create Post">
+        <div class="modal-footer cosmos-modal">
+          <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Cancel</button>
+          <input type="submit" class="btn btn-outline-like my-2" value="Create Post">
         </div>
       </form>
     </div>

@@ -1,15 +1,50 @@
 <!-- Navbar -->
 <nav class="navbar shadow fixed-top cosmos-nav">
-  <div class="container-fluid">
+  <div class="container-fluid d-flex justify-content-between">
+
+    <!-- Navbar brand -->
     <a class="navbar-brand" href="{% url 'landing' %}" style="color: white;"><i class="bi bi-moon-stars-fill"></i>&nbsp;&nbsp;Cosmos</a>
-    <div class="d-flex align-self-end">
-      <h5 class="align-self-center m-1"><span class="badge badge-light justify-self-right">Logged in as {{ current_user.username }}</span></h5>
-      <button type="button" class="fw-bold m-1 btn btn-light" data-bs-toggle="modal" data-bs-target="#modal-post-form">Create Post</button>
-      <a class="fw-bold m-1 btn btn-light" href="{% url 'edit_user' %}">Edit Profile</a>
-      <a class="fw-bold btn btn-light m-1" href="{% url 'logout' %}">Logout</a>
+
+    <!-- Search bar -->
+    <!-- TODO -->
+
+    <!-- Navbar controls -->
+    <div class="d-flex">
+
+      <div class="d-flex">
+        {% if current_user.id %}
+
+          <!-- Create Post button (see Create Post modal) -->
+          <button type="button" class="btn btn-cosmos-light m-1" data-bs-toggle="modal" data-bs-target="#modal-post-form"><i class="bi bi-file-post-fill"></i></button>
+
+          <!-- User Profile button -->
+          <a class="fw-bold m-1 btn btn-cosmos-light" href="{% url 'query_user' %}"><i class="bi bi-person-fill"></i></a>
+
+          <!-- Account dropdown -->
+          <div class="dropdown align-self-center m-1">
+            <!-- Dropdown button -->
+            <button class="btn btn-cosmos-light dropdown-toggle" type="button" data-bs-toggle="dropdown"><i class="bi bi-gear-fill"></i></button>
+
+            <!-- Dropdown menu -->
+            <ul class="dropdown-menu dropdown-menu-end">
+
+              <!-- Edit account -->
+              <li><a href="{% url 'edit_user' %}" class="dropdown-item">Settings</a></li>
+
+              <!-- Log out -->
+              <li><a href="{% url 'logout' %}" class="dropdown-item">Log Out</a></li>
+            </ul>
+          </div>
+        {% else %}
+          <a class="btn btn-cosmos-light" href="{% url 'login' %}"><i class="bi bi-person-plus-fill"></i> Log In</a>
+        {% endif %}
+      </div>
     </div>
   </div>
 </nav>
 
 <!-- Navbar Spacer -->
 <div class="mb-3" style="height:50px;"></div>
+
+<!-- Create Post modal -->
+{% include 'cosmos/create-post-modal.html' with post_form=post_form %}

@@ -1,14 +1,15 @@
 :root {
-    --neutral-body-bg-color: #221e38;
-    --neutral-div-bg-color: #443c6f;
-    --neutral-nav-bg-color: #8877dd;
+    --body-bg: #221e38;
+    --div-bg: #443c6f;
+    --nav-bg: #8877dd;
+    --nav-bg-light: #dbd5fa;
     --neutral-light-color: #aa88ff;
     --btn-like: #64d200;
     --btn-dislike: #ff4646;
 }
 
 body {
-    background-color: var(--neutral-body-bg-color);
+    background-color: var(--body-bg);
 }
 
 button.btn.btn-outline-like, a.btn.btn-outline-like, .btn.btn-outline-like {
@@ -31,27 +32,50 @@ button.btn.btn-outline-dislike:hover, a.btn.btn-outline-dislike:hover, .btn.btn-
     background-color: var(--btn-dislike);
 }
 
-button.btn.btn-load, a.btn.btn-load, .btn.btn-load {
-    background-color: var(--neutral-nav-bg-color);
-    border-color: var(--neutral-nav-bg-color);
+button.btn.btn-cosmos, a.btn.btn-cosmos, .btn.btn-cosmos {
+    background-color: var(--nav-bg);
+    border-color: var(--nav-bg);
     color: white;
 }
 
-button.btn.btn-load:hover, a.btn.btn-load:hover, .btn.btn-load:hover {
-    background-color: var(--neutral-div-bg-color);
+button.btn.btn-cosmos:hover, a.btn.btn-cosmos:hover, .btn.btn-cosmos:hover {
+    background-color: var(--div-bg);
+}
+
+button.btn.btn-cosmos-light, a.btn.btn-cosmos-light, .btn.btn-cosmos-light {
+    background-color: var(--nav-bg-light);
+    border-color: var(--nav-bg-light);
+    color: var(--div-bg);
+}
+
+button.btn.btn-cosmos-light:hover, a.btn.btn-cosmos-light:hover, .btn.btn-cosmos-light:hover {
+    background-color: var(--div-bg);
+    border-color: var(--nav-bg-light);
+    color: white;
 }
 
 nav.navbar {
-    background-color: var(--neutral-nav-bg-color);
+    background-color: var(--nav-bg);
     /*border-image: linear-gradient(to right, red, var(--neutral-nav-bg-color)) 1 100%;
     border-bottom-style: solid;
     border-bottom-width: 5px;*/
 }
 
 div.modal-header.cosmos-modal {
-    border-color: var(--neutral-nav-bg-color);
+    border-color: var(--nav-bg);
 }
 
 div.modal-footer.cosmos-modal {
-    border-color: var(--neutral-nav-bg-color);
+    border-color: var(--nav-bg);
+}
+
+.cosmos-text-input {
+    background-color: var(--body-bg);
+    color: var(--nav-bg);
+    border-color: var(--nav-bg);
+}
+
+.cosmos-text-input:focus {
+    background-color: var(--body-bg);
+    color: white;
 }
